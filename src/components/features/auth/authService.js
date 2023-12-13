@@ -12,6 +12,24 @@ const registrationService = async(registerdata)=>{
     }
 }
 
+const attendaceRegisterService = async(EventName)=>{
+    try {
+        const response = await axios.post(`${url}auth/attendance`,EventName)
+        return response
+    } catch (error) {
+        return error?.response?.data
+    }
+}
+
+const attendaceSaveService = async(AttendedDetails)=>{
+    try {
+        const response = await axios.post(`${url}auth/attendancesave`,AttendedDetails)
+        return response
+    } catch (error) {
+        return error?.response?.data
+    }
+}
+
 const contactService = async(contactData)=>{
     try {
         const response = await axios.post(`${url}auth/contact`,contactData)
@@ -35,7 +53,9 @@ const feedbackService = async(FeedBackData)=>{
 const authSerivces = {
     registrationService,
     contactService,
-    feedbackService
+    feedbackService,
+    attendaceRegisterService,
+    attendaceSaveService
 }
 
 export default authSerivces

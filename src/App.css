@@ -12,6 +12,10 @@ a{
   text-decoration: none;
 }
 
+.ant-table-row-selected{
+  background: white !important;
+}
+
 .error{
   color: red;
   margin-top: -10px;

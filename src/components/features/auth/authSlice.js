@@ -10,6 +10,8 @@ const intialState = {
     isLoading:false,
     AlreadyRegisterd:'',
     ContactSuccess:'',
+    AttendanceRegister:'',
+    AttendanceSave:'',
     message:""
 }
 
@@ -39,10 +41,28 @@ export const feedback = createAsyncThunk('auth/feedback',async(feedBackData,thun
     }
 })
 
+export const attendance = createAsyncThunk('auth/attendance',async(EventName,thunkAPI)=>{
+    try {
+        return await authSerivces.attendaceRegisterService(EventName)
+    } catch (error) {
+       return thunkAPI.rejectWithValue(error)
+    }
+})
+
+export const attendanceSave = createAsyncThunk('auth/attendancesave',async(AttendedData,thunkAPI)=>{
+    try {
+        return await authSerivces.attendaceSaveService(AttendedData)
+    } catch (error) {
+       return thunkAPI.rejectWithValue(error)
+    }
+})
+
 export const authSlice = createSlice({
     name:"auth",
     initialState:intialState,
-    reducers:{},
+    reducers:{
+        
+    },
     extraReducers:(builder)=>{
         builder.addCase(registrationSlice.pending,(state)=>{
             state.isError = false;
@@ -103,7 +123,37 @@ export const authSlice = createSlice({
                 toast.success('FeedBack Submitted')
             }
         })
-        .addCase(feedback.rejected,(state,action)=>{
+        builder.addCase(attendance.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(attendance.fulfilled,(state,action)=>{
+            state.isError = false
+            state.isSuccess = true
+            state.isLoading = false
+            if(action.payload?.data?.status === 306)
+             toast.info('Attendance Submitted For This Event')
+            state.AttendanceRegister = action.payload
+        })
+        .addCase(attendance.rejected,(state,action)=>{
+            state.isError = true
+            state.isLoading = false
+            state.isSuccess = false
+            state.message =action.error
+        })
+        builder.addCase(attendanceSave.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(attendanceSave.fulfilled,(state,action)=>{
+            state.isError = false
+            state.isSuccess = true
+            state.isLoading = false
+            state.AttendanceSave = action.payload?.status
+        })
+        .addCase(attendanceSave.rejected,(state,action)=>{
             state.isError = true
             state.isLoading = false
             state.isSuccess = false

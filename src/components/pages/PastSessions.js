@@ -27,18 +27,18 @@ const PastSessions = () => {
     const year = date.getFullYear()
     const month = date.getMonth()
     const day = date.getDate()
-    const today = `${year}-${month}-${day}`
+    const today = `${year}-${month+1}-${day}`
     setDate(today)
   },[])
 
   const compareTwoDates = (x,y)=>{
     const date1 = new Date(x)
-    const date2 = new Date(y)
+    const date2 = new Date(date)
 
     console.log(x);
     console.log(y);
 
-    if (date1.getTime() < date2.getTime()) {
+    if (date1.getTime() <= date2.getTime()) {
         return true
       } else if (date1.getTime() > date2.getTime()) {
         return false
@@ -122,7 +122,7 @@ const PastSessions = () => {
                  />
                </div>
              ) : null;
-           })
+           }).reverse()
          ) : (
            <Loading />
          )}

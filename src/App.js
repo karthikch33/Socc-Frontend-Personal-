@@ -14,6 +14,8 @@ import { Helmet } from 'react-helmet-async';
 
 import Announcements from './components/pages/Announcements';
 import FeedBack from './components/pages/FeedBack';
+import Attendance from './components/pages/Attendance';
+import AttendancePage from './components/pages/AttendancePage';
 function App() {
   return (
 
@@ -27,6 +29,8 @@ function App() {
                 <Route path='/codingchannels' element={<CodingChannels/>}/>
                 <Route path='/contact' element={<Contact/>}/>
                 <Route path='/team' element={<Team/>}/>
+                <Route path='/attendance' element={<AttendancePage/>}/>
+                <Route path='/attendance/:id' element={<Attendance/>}/>
                 <Route path='/announcements' element={<Announcements/>}/>
                 <Route path='/adminsessionaddition' element={<AdminSessionAddition/>}/>
                 <Route path='/registrations/:id' element={<SessionRegistraion/>}/>
