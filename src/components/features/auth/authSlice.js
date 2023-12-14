@@ -132,9 +132,7 @@ export const authSlice = createSlice({
             state.isError = false
             state.isSuccess = true
             state.isLoading = false
-            if(action.payload?.data?.status === 306)
-             toast.info('Attendance Submitted For This Event')
-            state.AttendanceRegister = action.payload
+            state.AttendanceRegister = action.payload        
         })
         .addCase(attendance.rejected,(state,action)=>{
             state.isError = true

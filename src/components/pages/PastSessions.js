@@ -117,7 +117,7 @@ const PastSessions = () => {
                    outcomeDescription={outcomeDescription}
                    sessionId={element?._id}
                    sessiontitle={element?.sessiontitle}
-                   today={false}
+                   today={true}
                    history={historyDescription}
                  />
                </div>

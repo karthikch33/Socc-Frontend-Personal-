@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { attendance, attendanceSave, resetState } from '../features/auth/authSlice';
 import {useLocation, useNavigate} from 'react-router-dom'
 import { GetSession } from '../features/session/sessionSlice';
+import * as XLSX from 'xlsx';
 
 
 
@@ -49,6 +50,7 @@ const Attendance = () => {
   const {Session} = useSelector(state=>state.admin)
   const {AttendanceSave} = useSelector(state=>state.auth)
   const [alert,setAlert] = useState(false)
+  const [firstTime,setFirstTime] = useState(true)
 
   useEffect(()=>{
     if(getLocation !== undefined)
@@ -57,7 +59,8 @@ const Attendance = () => {
 
   useEffect(() => {
     const eventNamePayload = { EventName: Session?.sessiontitle };
-    dispatch(attendance(eventNamePayload));
+    if(eventNamePayload)  
+      dispatch(attendance(eventNamePayload));
   }, [Session]);
 
   useEffect(()=>{
@@ -66,13 +69,13 @@ const Attendance = () => {
       setAlert(true)
       setTimeout(()=>{
         setAlert(false)
+        dispatch(resetState())
         navigate('/attendance')
       },2000)
-      setTimeout(()=>{
-        dispatch(resetState())
-      },4000)
     }
   },[AttendanceSave])
+
+
 
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
@@ -81,8 +84,10 @@ const Attendance = () => {
   useEffect(() => {
     if(AttendanceRegister?.data?.status === 306)
     {
-        navigate('/attendance')
+      setFirstTime(false)
     }
+    else
+    setFirstTime(true)
     if (Array.isArray(AttendanceRegister?.data?.findRegisterd)) {
       const newData = AttendanceRegister?.data?.findRegisterd?.map((ele, index) => ({
         ...ele,
@@ -104,8 +109,15 @@ const Attendance = () => {
 
   const handleSubmitAttendance = () => {
     dispatch(attendanceSave(data))
-
   };
+
+  const handleExcelSheet = ()=>{
+    window.location.reload()
+    const worksheet = XLSX.utils.json_to_sheet(AttendanceRegister?.data?.findFromAttendance?.Attended);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.writeFile(workbook, 'table_data.xlsx');
+  }
 
   return (
     <div className="container-xxl">
@@ -117,21 +129,21 @@ const Attendance = () => {
           </h3>
         </div>
       </div>
-     {alert &&  <Alert message="Attendance Submitted" type="success"/>}
+     {alert &&  <Alert message="Attendance Submitted" type="success" className='text-center'/>}
+     {firstTime !==true &&  <Alert message="Attendance Submitted for This Event Reload For Confirmation" type="info" className='text-center my-4'/>}
       <div className="row">
         <div className="col-12">
-          <Table columns={columns} dataSource={data} />;
+        {firstTime === true ? <Table columns={columns} dataSource={data} /> :""}  
         </div>
       </div>
       <div className="row">
         <div className="col-12 text-center mt-3">
-          <Button type="primary" onClick={handleSubmitAttendance}>
-            Submit Attendance
-          </Button>
+           {firstTime === true ?<Button type="primary" onClick={handleSubmitAttendance}> Submit Attendance</Button> :""} 
+           {firstTime !== true ?<Button type="" className='btn-success' onClick={handleExcelSheet}> Download Excel Sheet</Button> :""} 
         </div>
       </div>
     </div>
   )
 }
 
-export default Attendance;
+export default Attendance
