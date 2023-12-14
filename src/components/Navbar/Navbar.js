@@ -12,9 +12,9 @@ function NavBar() {
       <nav className="navbar">
         <div className="nav-container">
           <NavLink exact to="/" className="nav-logo">
-            <span>SOCC</span>
+            <span>Admin(S)</span>
             <span className="icon">
-              <CodeIcon />
+              {/* <CodeIcon /> */}
             </span>
           </NavLink>
 
@@ -22,7 +22,7 @@ function NavBar() {
             <li className="nav-item">
               <NavLink
                 exact
-                to="/"
+                to="/home"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}

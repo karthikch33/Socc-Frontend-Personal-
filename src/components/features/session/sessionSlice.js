@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import sessionServices from "./sessionService";
+import adminServices from "./sessionService";
+import { toast } from "react-toastify";
 
 
 const initialState = {
@@ -9,12 +10,13 @@ const initialState = {
     AlreadyRegistered:"",
     AllSessions:"",
     Session:"",
+    LoginData:'',
     message:"",
 }
 
 export const sessionRegister = createAsyncThunk('session/register',async(registerData,thunkAPI)=>{
     try {
-        return await sessionServices.registerSessionService(registerData)
+        return await adminServices.registerSessionService(registerData)
     } catch (error) {
         return thunkAPI.rejectWithValue(error)
     }
@@ -22,7 +24,7 @@ export const sessionRegister = createAsyncThunk('session/register',async(registe
 
 export const GetSessions = createAsyncThunk('session/allsession',async(thunkAPI)=>{
     try {
-        return await sessionServices.SessionsService();
+        return await adminServices.SessionsService();
     } catch (error) {
         return thunkAPI.rejectWithValue(error)
     }
@@ -30,9 +32,17 @@ export const GetSessions = createAsyncThunk('session/allsession',async(thunkAPI)
 
 export const GetSession = createAsyncThunk('session/getsession',async(sessionId,thunkAPI)=>{
     try {
-        return await sessionServices.SessionService(sessionId)
+        return await adminServices.SessionService(sessionId)
     } catch (error) {
         return thunkAPI.rejectWithValue(error)
+    }
+})
+
+export const adminLogin = createAsyncThunk('admin/adminlogin',async(loginData,thunkAPI)=>{
+    try {
+        return await adminServices.adminLoginService(loginData)
+    } catch (error) {
+        thunkAPI.rejectWithValue(error)
     }
 })
 
@@ -91,6 +101,37 @@ const sessionSlice = createSlice({
             state.isSuccess = false;
             state.isLoading = false
             state.message = action.error
+        })
+        builder.addCase(adminLogin.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(adminLogin.fulfilled,(state,action)=>{
+            state.isError = false
+            state.isSuccess = true
+            state.isLoading = false
+            state.LoginData = action.payload
+            if(action.payload?.status === 201)
+            {
+                toast.success("Login Sucess")
+                localStorage.setItem('adminData',JSON.stringify(action.payload))
+            }
+            else if(action.payload?.status === 305)
+            {
+                toast.info("Admin User Not Found")
+            }
+            else if(action.payload?.status === 404)
+            {
+                toast.error("Password Not Matched")
+            }
+
+        })
+        .addCase(adminLogin.rejected,(state,action)=>{
+            state.isError = true
+            state.isLoading = false
+            state.isSuccess = false
+            state.message =action.error
         })
     }
 })

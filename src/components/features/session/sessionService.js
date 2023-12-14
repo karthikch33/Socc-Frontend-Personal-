@@ -18,10 +18,17 @@ const SessionService = async(sessionId)=>{
     return response.data
 }
 
+export const adminLoginService = async(loginData)=>{
+    const response = await axios.post(`${url}admin/adminlogin`,loginData)
+    return response.data
+}
+
+
 const sessionServices = {
     registerSessionService,
     SessionsService,
-    SessionService
+    SessionService,
+    adminLoginService
 }
 
 export default sessionServices

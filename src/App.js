@@ -16,21 +16,23 @@ import Announcements from './components/pages/Announcements';
 import FeedBack from './components/pages/FeedBack';
 import Attendance from './components/pages/Attendance';
 import AttendancePage from './components/pages/AttendancePage';
+import Login from './components/Authentication/Login';
+import PrivateRoutes from './components/PrivateRoutes';
 function App() {
   return (
-
     <>
       <BrowserRouter>
           <Routes>
             <Route path='/' element={<Layout/>}>
                 <Route path='/sessions' element={<Sessions/>}/>
                 <Route path='/about' element={<About/>}/>
-                <Route index element={<Home/>}/>
+                <Route path='/home' element={<Home/>}/>
                 <Route path='/codingchannels' element={<CodingChannels/>}/>
-                <Route path='/contact' element={<Contact/>}/>
+                <Route path='/contact' element={<PrivateRoutes><Contact/></PrivateRoutes>}/>
                 <Route path='/team' element={<Team/>}/>
-                <Route path='/attendance' element={<AttendancePage/>}/>
-                <Route path='/attendance/:id' element={<Attendance/>}/>
+                <Route index path='/' element={<Login/>}/>
+                <Route path='/attendance' element={<PrivateRoutes><AttendancePage/></PrivateRoutes>}/>
+                <Route path='/attendance/:id' element={<PrivateRoutes><Attendance/></PrivateRoutes>}/>
                 <Route path='/announcements' element={<Announcements/>}/>
                 <Route path='/adminsessionaddition' element={<AdminSessionAddition/>}/>
                 <Route path='/registrations/:id' element={<SessionRegistraion/>}/>
