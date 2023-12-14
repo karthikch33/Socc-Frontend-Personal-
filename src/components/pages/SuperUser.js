@@ -6,7 +6,7 @@ import { emailTokenSuperUser } from '../features/session/sessionSlice'
 import { toast } from 'react-toastify'
 
 const SuperUser = () => {
-    const [tokenGen,setTokenGen] = useState(false)
+    const [tokenGen,setTokenGen] = useState(true)
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues:{
@@ -47,12 +47,17 @@ const SuperUser = () => {
             </div>
             <div className="col-12">
                 <form className='' onSubmit={formik.handleSubmit}>
-                     {tokenGen?<CustomtInput type="text" name="emailGenToken" onChange= {formik.handleChange('emailGenToken')} placeholder="Enter Email Gen Token"/>:""}   
-                     <button type='submit' className='btn-primary'>Verify</button>
+                     {tokenGen?<CustomtInput type="text" name="emailGenToken" onChange= {formik.handleChange('emailGenToken')} placeholder="Enter Email Gen Token"/>:""}  
+                     <div className="row">
+                        <div className="col-12 d-flex justify-content-between">
+                        <button className='btn btn-warning d-flex justify-content-center' onClick={()=>EmailGenToken()}>Gen Token</button> 
+                    {tokenGen?<button type='submit' className='btn btn-primary'>Verify</button>:""} 
+                        </div>   
+                    </div> 
                 </form>
             </div>
             <div className="col-12">
-                <button className='btn btn-warning d-flex justify-content-center' onClick={()=>EmailGenToken()}>Gen Token</button>
+                
             </div>
         </div>
     </div>
