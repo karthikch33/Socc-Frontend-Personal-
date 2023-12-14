@@ -14,7 +14,6 @@ const Footer = () => {
     });
   };
   return (
-    
     <footer className='footer'>
     <div className='container-xxl footer-cont'>
         <div className="row">
@@ -25,6 +24,7 @@ const Footer = () => {
                  <Link to={'/team'}><li><BiLastPage/><label className='mx-4' style={{cursor:"pointer"}} onClick={handleScrollToTop}>Team</label></li></Link>
                  <Link to={'/announcements'} onClick={handleScrollToTop}><li><BiLastPage/><label className='mx-4' style={{cursor:"pointer"}}>Announcements</label></li></Link>
                  <Link to={'/sessions'} onClick={handleScrollToTop}><li><BiLastPage/><label className='mx-4' style={{cursor:"pointer"}}> Registrations</label></li></Link>
+                 <Link to={'/superuser'} ><li><BiLastPage/><label style={{cursor:"pointer"}} onClick={handleScrollToTop}className='mx-4'>SuperUser</label></li></Link>
                 </ul>
               </div>
               <div className="col-4">
@@ -43,6 +43,7 @@ const Footer = () => {
                  onClick={handleScrollToTop}>Contact</label></li></Link>
                  <Link to={'/team'} ><li><BiLastPage/><label style={{cursor:"pointer"}} className='mx-4' onClick={handleScrollToTop}>Team</label></li></Link>
                  <Link to={'/sessions'} ><li><BiLastPage/><label style={{cursor:"pointer"}} onClick={handleScrollToTop}className='mx-4'>Sessions</label></li></Link>
+                 
                 </ul>
               </div>
          </div>

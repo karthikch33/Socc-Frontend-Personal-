@@ -62,7 +62,7 @@ function NavBar() {
                 className="nav-links"
                 onClick={handleClick}
               >
-                Contact
+                Complaints
               </NavLink>
             </li>
             <li className="nav-item">

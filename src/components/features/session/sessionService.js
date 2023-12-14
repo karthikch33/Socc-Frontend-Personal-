@@ -23,12 +23,18 @@ export const adminLoginService = async(loginData)=>{
     return response.data
 }
 
+export const superUserMailGenerator = async(emailToken)=>{
+    const response = await axios.post(`${url}admin/sendtokenforsuperuser`,emailToken)
+    return response.data
+}
+
 
 const sessionServices = {
     registerSessionService,
     SessionsService,
     SessionService,
-    adminLoginService
+    adminLoginService,
+    superUserMailGenerator
 }
 
 export default sessionServices

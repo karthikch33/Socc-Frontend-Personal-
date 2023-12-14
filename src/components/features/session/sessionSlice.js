@@ -11,6 +11,7 @@ const initialState = {
     AllSessions:"",
     Session:"",
     LoginData:'',
+    EmailToken:'',
     message:"",
 }
 
@@ -41,6 +42,15 @@ export const GetSession = createAsyncThunk('session/getsession',async(sessionId,
 export const adminLogin = createAsyncThunk('admin/adminlogin',async(loginData,thunkAPI)=>{
     try {
         return await adminServices.adminLoginService(loginData)
+    } catch (error) {
+        thunkAPI.rejectWithValue(error)
+    }
+})
+
+export const emailTokenSuperUser = createAsyncThunk('admin/emailtokensuperuser',async(emailToken,thunkAPI)=>{
+    try {
+        console.log(emailToken);
+        return await adminServices.superUserMailGenerator(emailToken)
     } catch (error) {
         thunkAPI.rejectWithValue(error)
     }
@@ -132,6 +142,24 @@ const sessionSlice = createSlice({
             state.isLoading = false
             state.isSuccess = false
             state.message =action.error
+        })
+        builder.addCase(emailTokenSuperUser.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(emailTokenSuperUser.fulfilled,(state,action)=>{
+            state.isError = false;
+            state.isSuccess = true;
+            state.isLoading = false;
+            console.log(action.payload);
+            state.EmailToken = action.payload
+        })
+        .addCase(emailTokenSuperUser.rejected,(state,action)=>{
+            state.isError = true;
+            state.isSuccess = false;
+            state.isLoading = false
+            state.message = action.error
         })
     }
 })

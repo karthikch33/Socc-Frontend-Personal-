@@ -18,6 +18,7 @@ import Attendance from './components/pages/Attendance';
 import AttendancePage from './components/pages/AttendancePage';
 import Login from './components/Authentication/Login';
 import PrivateRoutes from './components/PrivateRoutes';
+import SuperUser from './components/pages/SuperUser';
 function App() {
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
                 <Route path='/codingchannels' element={<CodingChannels/>}/>
                 <Route path='/contact' element={<PrivateRoutes><Contact/></PrivateRoutes>}/>
                 <Route path='/team' element={<Team/>}/>
+                <Route path='/superuser' element={<PrivateRoutes><SuperUser/></PrivateRoutes>}/>
                 <Route index path='/' element={<Login/>}/>
                 <Route path='/attendance' element={<PrivateRoutes><AttendancePage/></PrivateRoutes>}/>
                 <Route path='/attendance/:id' element={<PrivateRoutes><Attendance/></PrivateRoutes>}/>
