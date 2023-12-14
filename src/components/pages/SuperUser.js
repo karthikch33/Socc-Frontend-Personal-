@@ -3,13 +3,19 @@ import React, { useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import CustomtInput from '../CustomtInput'
 import { emailTokenSuperUser } from '../features/session/sessionSlice'
+import { toast } from 'react-toastify'
 
 const SuperUser = () => {
     const [tokenGen,setTokenGen] = useState(false)
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues:{
-            emailGenToken:''
+            emailGenToken:'',
+            token:''
+        },
+        onSubmit:(values)=>{
+            if(formik.values.emailGenToken === formik.values.token)
+            toast.success('Super User Logged In') 
         }
     })
 
@@ -30,7 +36,7 @@ const SuperUser = () => {
       const EmailGenToken = ()=>{
           setTokenGen(true)
           const randomPin = generateRandomPin();
-          console.log(randomPin);
+          formik.values.token = randomPin
           dispatch(emailTokenSuperUser(randomPin))
     }
   return (
@@ -42,6 +48,7 @@ const SuperUser = () => {
             <div className="col-12">
                 <form className='' onSubmit={formik.handleSubmit}>
                      {tokenGen?<CustomtInput type="text" name="emailGenToken" onChange= {formik.handleChange('emailGenToken')} placeholder="Enter Email Gen Token"/>:""}   
+                     <button type='submit' className='btn-primary'>Verify</button>
                 </form>
             </div>
             <div className="col-12">
