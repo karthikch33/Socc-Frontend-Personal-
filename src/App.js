@@ -19,6 +19,8 @@ import AttendancePage from './components/pages/AttendancePage';
 import Login from './components/Authentication/Login';
 import PrivateRoutes from './components/PrivateRoutes';
 import SuperUser from './components/pages/SuperUser';
+import AdminUserRegister from './components/pages/adminUserRegister';
+import PrivateRoutesAdminR from './components/PrivateRoutesAdminR';
 function App() {
   return (
     <>
@@ -37,6 +39,7 @@ function App() {
                 <Route path='/attendance/:id' element={<PrivateRoutes><Attendance/></PrivateRoutes>}/>
                 <Route path='/announcements' element={<Announcements/>}/>
                 <Route path='/adminsessionaddition' element={<AdminSessionAddition/>}/>
+                <Route path='/adminuserRegister' element={<PrivateRoutesAdminR><AdminUserRegister/></PrivateRoutesAdminR>}/>
                 <Route path='/registrations/:id' element={<SessionRegistraion/>}/>
                 <Route path='/feedback/:id' element={<FeedBack/>}/>
                 <Route path='/:unwanted' element={<PageNotFound/>}/>

@@ -49,8 +49,24 @@ export const adminLogin = createAsyncThunk('admin/adminlogin',async(loginData,th
 
 export const emailTokenSuperUser = createAsyncThunk('admin/emailtokensuperuser',async(emailToken,thunkAPI)=>{
     try {
-        console.log(emailToken);
         return await adminServices.superUserMailGenerator(emailToken)
+    } catch (error) {
+        thunkAPI.rejectWithValue(error)
+    }
+})
+
+export const deleteEmailTokenSuperUser = createAsyncThunk('admin/deleteSuperUserToken',async(emailToken,thunkAPI)=>{
+    try {
+        return await adminServices.deleteSuperUserToken(emailToken)
+    } catch (error) {
+        thunkAPI.rejectWithValue(error)
+    }
+})
+
+
+export const getEmailTokenSuperUser = createAsyncThunk('admin/getSuperUserToken',async(emailToken,thunkAPI)=>{
+    try {
+        return await adminServices.getSuperUserToken(emailToken)
     } catch (error) {
         thunkAPI.rejectWithValue(error)
     }
@@ -152,10 +168,44 @@ const sessionSlice = createSlice({
             state.isError = false;
             state.isSuccess = true;
             state.isLoading = false;
-            console.log(action.payload);
-            state.EmailToken = action.payload
+            toast.success('Token Generated ')
         })
         .addCase(emailTokenSuperUser.rejected,(state,action)=>{
+            state.isError = true;
+            state.isSuccess = false;
+            state.isLoading = false
+            state.message = action.error
+        })
+        builder.addCase(deleteEmailTokenSuperUser.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(deleteEmailTokenSuperUser.fulfilled,(state,action)=>{
+            state.isError = false;
+            state.isSuccess = true;
+            state.isLoading = false;
+        })
+        .addCase(deleteEmailTokenSuperUser.rejected,(state,action)=>{
+            state.isError = true;
+            state.isSuccess = false;
+            state.isLoading = false
+            state.message = action.error
+        })
+        builder.addCase(getEmailTokenSuperUser.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(getEmailTokenSuperUser.fulfilled,(state,action)=>{
+            state.isError = false;
+            state.isSuccess = true;
+            state.isLoading = false;
+            state.EmailToken = action.payload
+            if(action.payload?.status === 404)
+            toast.error('Token Entered Invalid')
+        })
+        .addCase(getEmailTokenSuperUser.rejected,(state,action)=>{
             state.isError = true;
             state.isSuccess = false;
             state.isLoading = false

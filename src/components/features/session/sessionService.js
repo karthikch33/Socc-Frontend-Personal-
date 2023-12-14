@@ -28,13 +28,25 @@ export const superUserMailGenerator = async(emailToken)=>{
     return response.data
 }
 
+export const deleteSuperUserToken = async(emailToken)=>{
+    const response = await axios.post(`${url}admin/deletetokenfromsuperuser`,{token:emailToken})
+    return response.data
+}
+
+export const getSuperUserToken = async(emailToken)=>{
+    const response = await axios.post(`${url}admin/gettokenfromsuperuser`,{token:emailToken})
+    return response.data
+}
+
 
 const sessionServices = {
     registerSessionService,
     SessionsService,
     SessionService,
     adminLoginService,
-    superUserMailGenerator
+    superUserMailGenerator,
+    deleteSuperUserToken,
+    getSuperUserToken
 }
 
 export default sessionServices
