@@ -16,6 +16,8 @@ const SuperUser = () => {
         onSubmit:(values)=>{
             if(formik.values.emailGenToken === formik.values.token)
             toast.success('Super User Logged In') 
+            else
+            toast.error('Super User Token Error')
         }
     })
 
