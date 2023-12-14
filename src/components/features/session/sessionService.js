@@ -24,7 +24,7 @@ export const adminLoginService = async(loginData)=>{
 }
 
 export const superUserMailGenerator = async(emailToken)=>{
-    const response = await axios.post(`${url}admin/sendtokenforsuperuser`,emailToken)
+    const response = await axios.post(`${url}admin/sendtokenforsuperuser`,{token:emailToken})
     return response.data
 }
 
