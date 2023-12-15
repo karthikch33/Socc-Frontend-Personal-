@@ -38,6 +38,11 @@ export const getSuperUserToken = async(emailToken)=>{
     return response.data
 }
 
+export const adminRegisterService = async(registerData)=>{
+    const respsone = await axios.post(`${url}admin/adminregisterunknown`,registerData)
+    return respsone.data
+}
+
 
 const sessionServices = {
     registerSessionService,
@@ -46,7 +51,8 @@ const sessionServices = {
     adminLoginService,
     superUserMailGenerator,
     deleteSuperUserToken,
-    getSuperUserToken
+    getSuperUserToken,
+    adminRegisterService
 }
 
 export default sessionServices

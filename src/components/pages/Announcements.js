@@ -7,7 +7,7 @@ const Announcements = () => {
     useEffect(() => {
         const timeout = setTimeout(() => {
           setIsLoaded(true);
-        }, 1000);
+        }, 600);
         return () => clearTimeout(timeout);
       }, []);
 

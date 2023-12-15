@@ -72,6 +72,14 @@ export const getEmailTokenSuperUser = createAsyncThunk('admin/getSuperUserToken'
     }
 })
 
+export const adminRegister = createAsyncThunk('admin/adminRegister',async(registerData,thunkAPI)=>{
+    try {
+        return await adminServices.adminRegisterService(registerData)
+    } catch (error) {
+        thunkAPI.rejectWithValue(error)
+    }
+})
+
 const sessionSlice = createSlice({
     name:'session',
     initialState:initialState,
@@ -206,6 +214,34 @@ const sessionSlice = createSlice({
             toast.error('Token Entered Invalid')
         })
         .addCase(getEmailTokenSuperUser.rejected,(state,action)=>{
+            state.isError = true;
+            state.isSuccess = false;
+            state.isLoading = false
+            state.message = action.error
+        })
+        builder.addCase(adminRegister.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(adminRegister.fulfilled,(state,action)=>{
+            state.isError = false;
+            state.isSuccess = true;
+            state.isLoading = false;
+            if(action.payload?.status === 201)
+            {
+                toast.success('Admin Register Successfull')
+            }
+            else if(action.payload?.status === 409)
+            {
+                toast.info(action.payload?.message)
+            }
+            else if(action.payload?.status === 501)
+            {
+                toast.error(action.payload?.message)
+            }
+        })
+        .addCase(adminRegister.rejected,(state,action)=>{
             state.isError = true;
             state.isSuccess = false;
             state.isLoading = false

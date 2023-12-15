@@ -562,4 +562,29 @@ a{
 
 /* Hexagon Css Ends Here */
 
+/* Timer Css Starts Here */
+.timer-container {
+  text-align: center;
+  font-size: 1.5em;
+}
 
+.less-than-one-minute {
+  color: red; 
+}
+
+.timeout-label {
+  font-weight: bold;
+  margin-top: 10px;
+  animation: blink 1s infinite; 
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Timer Css Ends Here */
