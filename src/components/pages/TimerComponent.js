@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const MyComponent = () => {
-  const initialTimer = parseInt(localStorage.getItem('timer')) || 120; // Initial value is 120 seconds (2 minutes)
+  const initialTimer = parseInt(localStorage.getItem('timer')) || 90; // Initial value is 120 seconds (2 minutes)
   const [timer, setTimer] = useState(initialTimer);
 
   useEffect(() => {
