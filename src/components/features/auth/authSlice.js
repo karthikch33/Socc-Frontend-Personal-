@@ -12,6 +12,7 @@ const intialState = {
     AttendanceRegister:'',
     AllCompliants:'',
     AttendanceSave:'',
+    updatedContact:'',
     message:""
 }
 
@@ -54,6 +55,15 @@ export const attendance = createAsyncThunk('auth/attendance',async(EventName,thu
 export const attendanceSave = createAsyncThunk('auth/attendancesave',async(AttendedData,thunkAPI)=>{
     try {
         return await authSerivces.attendaceSaveService(AttendedData)
+    } catch (error) {
+       return thunkAPI.rejectWithValue(error)
+    }
+})
+
+export const updateContact = createAsyncThunk('auth/updateContact',async(resolvedData,thunkAPI)=>{
+    try {
+        console.log(resolvedData);
+        return await authSerivces.updateContactService(resolvedData)
     } catch (error) {
        return thunkAPI.rejectWithValue(error)
     }
@@ -148,6 +158,31 @@ export const authSlice = createSlice({
             state.AttendanceSave = action.payload?.status
         })
         .addCase(attendanceSave.rejected,(state,action)=>{
+            state.isError = true
+            state.isLoading = false
+            state.isSuccess = false
+            state.message =action.error
+        })
+        builder.addCase(updateContact.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(updateContact.fulfilled,(state,action)=>{
+            state.isError = false
+            state.isSuccess = true
+            state.isLoading = false
+            state.updatedContact = action.payload?.resolved
+            if(state.updatedContact === true)
+            {
+                toast.success('Resolved')
+            }
+            else
+            {
+                toast.error('Not Resolved')
+            }
+        })
+        .addCase(updateContact.rejected,(state,action)=>{
             state.isError = true
             state.isLoading = false
             state.isSuccess = false

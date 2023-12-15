@@ -40,6 +40,16 @@ const getContactService = async()=>{
     }
 }
 
+const updateContactService = async (resolvedData)=>{
+    try {
+        console.log(resolvedData);
+        const response = await axios.post(`${url}auth/updatecontact`,resolvedData)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
+
 const feedbackService = async(FeedBackData)=>{
     try {
         const response = await axios.post(`${url}auth/feedback`, FeedBackData)
@@ -56,7 +66,8 @@ const authSerivces = {
     feedbackService,
     attendaceRegisterService,
     attendaceSaveService,
-    getContactService
+    getContactService,
+    updateContactService
 }
 
 export default authSerivces
