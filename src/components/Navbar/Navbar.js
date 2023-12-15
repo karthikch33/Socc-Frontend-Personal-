@@ -6,6 +6,12 @@ import { CodeIcon, HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
 function NavBar() {
   const [click, setClick] = useState(false);
 
+  const handleLogOut = ()=>{
+    handleClick()
+    localStorage.removeItem('adminData')
+  }
+
+
   const handleClick = () => setClick(!click);
   return (
     <>
@@ -65,7 +71,7 @@ function NavBar() {
                 Complaints
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink
                 exact
                 to="/team"
@@ -75,7 +81,28 @@ function NavBar() {
               >
                Team
               </NavLink>
-            </li>
+            </li> */}
+           {localStorage.getItem('adminData') ? <li className="nav-item">
+              <NavLink
+                exact
+                to="/"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleLogOut}
+              >
+               LogOut
+              </NavLink>
+            </li>:
+            <li className="nav-item">
+            <NavLink
+                exact
+                to="/"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+               Login
+              </NavLink></li>}
           </ul>
           <div className="nav-icon" onClick={handleClick}>
             {click ? (

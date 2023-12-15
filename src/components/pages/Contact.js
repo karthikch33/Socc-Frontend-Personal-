@@ -58,15 +58,10 @@ const ContactPage = () => {
   },[])
 
   const {AllCompliants} = useSelector(state=>state.auth)
-  const [complaints,setCompliants] = useState([])
+  const {updateContact} = useSelector(state=>state.admin)
   const [data, setData] = useState([]);
-  const {updatedContact} = useSelector(state=>state.auth)
 
-  useEffect(()=>{
-    dispatch(getAllContact())
-    setCompliants(AllCompliants)
-  },[AllCompliants,updatedContact])
-
+  
   const resolveThis = (unqCode)=>{
     const sendAllData = {
       uniqueCode:unqCode,
@@ -74,6 +69,7 @@ const ContactPage = () => {
       resolvedBy: localStorage.getItem('adminData') ? JSON.parse(localStorage.getItem('adminData'))?.username : "N/A"
     }
     dispatch(updateContact(sendAllData))
+    dispatch(getAllContact())
   }
 
   const callme=(e)=>{
@@ -82,8 +78,8 @@ const ContactPage = () => {
 
 
   useEffect(() => {
-    if (Array.isArray(complaints)) {
-      const newData = complaints.map((ele, index) => {
+    if (Array.isArray(AllCompliants)) {
+      const newData = AllCompliants.map((ele, index) => {
         if (!ele?.resolved) {
           return {
             ...ele,
