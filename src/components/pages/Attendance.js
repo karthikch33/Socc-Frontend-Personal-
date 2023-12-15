@@ -82,7 +82,6 @@ const Attendance = () => {
       const newData = AttendanceRegister?.data?.findRegisterd?.map((ele, index) => ({
         ...ele,
         sno: index + 1,
-        absent: false,
       }));
       setData(newData);
     }
@@ -90,6 +89,7 @@ const Attendance = () => {
 
 
   const handleCheckboxChange = (record, field, value) => {
+    // console.log(value);
     const newData = data.map((item) =>
       item.registerid === record.registerid ? { ...item, [field]: value} : item
     );
