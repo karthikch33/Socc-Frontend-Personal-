@@ -43,6 +43,7 @@ export const adminRegisterService = async(registerData)=>{
     return respsone.data
 }
 
+// export const 
 
 const sessionServices = {
     registerSessionService,

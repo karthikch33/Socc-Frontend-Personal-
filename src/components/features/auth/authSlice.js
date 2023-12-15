@@ -9,8 +9,8 @@ const intialState = {
     isSuccess:false,
     isLoading:false,
     AlreadyRegisterd:'',
-    ContactSuccess:'',
     AttendanceRegister:'',
+    AllCompliants:'',
     AttendanceSave:'',
     message:""
 }
@@ -25,9 +25,11 @@ export const registrationSlice = createAsyncThunk('auth/register', async (regist
     }
 }); 
 
-export const contact = createAsyncThunk('auth/contact',async (contactData,thunkAPI)=>{
+
+
+export const getAllContact = createAsyncThunk('auth/contact',async(thunkAPI)=>{
     try {
-        return await authSerivces.contactService(contactData)
+        return await authSerivces.getContactService()
     } catch (error) {
         return thunkAPI.rejectWithValue(error)
     }
@@ -81,29 +83,6 @@ export const authSlice = createSlice({
             state.isSuccess = false
             state.message =action.error
         })
-        .addCase(contact.pending,(state,action)=>{
-            state.isError = false
-            state.isLoading = true
-            state.isSuccess = false
-        })
-        .addCase(contact.fulfilled,(state,action)=>{
-            state.isError = false
-            state.isSuccess = true
-            state.isLoading = false
-            state.ContactSuccess = action.payload
-            if(state.ContactSuccess && state.ContactSuccess?.success){
-                toast.success('FeedBack Received And Mail Has Been Generated')
-            }
-            else{
-                toast.error('FeedBack Submition Failed')
-            }
-        })
-        .addCase(contact.rejected,(state,action)=>{
-            state.isError = true
-            state.isLoading = false
-            state.isSuccess = false
-            state.message =action.error
-        })
         .addCase("Reset_all",()=>intialState)
         builder.addCase(feedback.pending,(state)=>{
             state.isError = false;
@@ -135,6 +114,23 @@ export const authSlice = createSlice({
             state.AttendanceRegister = action.payload        
         })
         .addCase(attendance.rejected,(state,action)=>{
+            state.isError = true
+            state.isLoading = false
+            state.isSuccess = false
+            state.message =action.error
+        })
+        builder.addCase(getAllContact.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(getAllContact.fulfilled,(state,action)=>{
+            state.isError = false
+            state.isSuccess = true
+            state.isLoading = false
+            state.AllCompliants = action.payload
+        })
+        .addCase(getAllContact.rejected,(state,action)=>{
             state.isError = true
             state.isLoading = false
             state.isSuccess = false

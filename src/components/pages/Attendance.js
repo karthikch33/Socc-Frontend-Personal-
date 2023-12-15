@@ -24,17 +24,7 @@ const Attendance = () => {
       dataIndex: 'registername',
     },
     {
-      title: 'Present',
-      dataIndex: 'present',
-      render: (text, record) => (
-        <Checkbox
-          checked={text}
-          onChange={(e) => handleCheckboxChange(record, 'present', e.target.checked)}
-        />
-      ),
-    },
-    {
-      title: 'Absent',
+      title: 'Check For Absent',
       dataIndex: 'absent',
       render: (text, record) => (
         <Checkbox
@@ -42,7 +32,7 @@ const Attendance = () => {
           onChange={(e) => handleCheckboxChange(record, 'absent', e.target.checked)}
         />
       ),
-    },
+    }
   ];
 
   const location = useLocation()
@@ -92,7 +82,6 @@ const Attendance = () => {
       const newData = AttendanceRegister?.data?.findRegisterd?.map((ele, index) => ({
         ...ele,
         sno: index + 1,
-        present: false,
         absent: false,
       }));
       setData(newData);
@@ -102,7 +91,7 @@ const Attendance = () => {
 
   const handleCheckboxChange = (record, field, value) => {
     const newData = data.map((item) =>
-      item.registerid === record.registerid ? { ...item, [field]: value } : item
+      item.registerid === record.registerid ? { ...item, [field]: value} : item
     );
     setData(newData);
   };
