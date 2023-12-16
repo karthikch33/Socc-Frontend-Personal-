@@ -58,7 +58,7 @@ const ContactPage = () => {
   },[])
 
   const {AllCompliants} = useSelector(state=>state.auth)
-  const {updateContact} = useSelector(state=>state.admin)
+  const {updatedContact} = useSelector(state=>state.admin)
   const [data, setData] = useState([]);
 
   
