@@ -7,8 +7,10 @@ const Bulb = () => {
   const {AllSessions} = useSelector(state=>state.admin)
 
   useEffect(()=>{
-    if(localStorage.getItem('server'))
+    if(AllSessions.length >=1 ){
+    localStorage.setItem('server',JSON.stringify({'server':'ON'}))
      setIsOn(true)
+    }
   },[AllSessions])
 
   return (

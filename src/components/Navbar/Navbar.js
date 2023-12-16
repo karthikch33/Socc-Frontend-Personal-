@@ -9,6 +9,8 @@ function NavBar() {
   const handleLogOut = ()=>{
     handleClick()
     localStorage.removeItem('adminData')
+    localStorage.removeItem('server')
+    localStorage.removeItem('email')
   }
 
 
