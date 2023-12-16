@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import CustomInput from '../CustomtInput.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminLogin } from '../features/session/sessionSlice';
+import { GetSessions, adminLogin } from '../features/session/sessionSlice';
 import { useNavigate } from 'react-router-dom';
 
 let schema = yup.object().shape({
@@ -15,6 +15,18 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { LoginData } = useSelector((state) => state.admin);
+  const {AllSessions} = useSelector(state=>state.admin)
+
+
+  
+
+  useEffect(()=>{
+    if(!localStorage.getItem('server') && AllSessions.length>=1)
+      localStorage.setItem('server',JSON.stringify({server:'ON'}))
+    else
+      localStorage.removeItem('server')
+
+  },[AllSessions])
 
   useEffect(() => {
     if (LoginData && LoginData?.status === 201) {
@@ -22,6 +34,10 @@ const Login = () => {
       navigate('/home');
     }
   }, [LoginData]);
+
+  useEffect(()=>{
+    dispatch(GetSessions())
+  },[])
 
   const formik = useFormik({
     initialValues: {

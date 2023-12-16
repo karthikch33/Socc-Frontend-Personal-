@@ -142,3 +142,20 @@
       color: #fff;
     }
   }
+
+  .bulb {
+    width: 20px;
+    height: 20px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+  }
+  
+  .bulb.on {
+    background-color: rgb(56, 246, 103);
+  }
+  
+  .bulb.off {
+    background-color: red;
+  }
