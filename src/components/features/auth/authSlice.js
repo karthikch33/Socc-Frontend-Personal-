@@ -13,6 +13,7 @@ const intialState = {
     AllCompliants:'',
     AttendanceSave:'',
     updatedContact:'',
+    AllCompliantsResolved:'',
     message:""
 }
 
@@ -31,6 +32,14 @@ export const registrationSlice = createAsyncThunk('auth/register', async (regist
 export const getAllContact = createAsyncThunk('auth/contact',async(thunkAPI)=>{
     try {
         return await authSerivces.getContactService()
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error)
+    }
+})
+
+export const getAllContactResolved = createAsyncThunk('auth/contactResolved',async(thunkAPI)=>{
+    try {
+        return await authSerivces.getContactResolvedService()
     } catch (error) {
         return thunkAPI.rejectWithValue(error)
     }
@@ -141,6 +150,23 @@ export const authSlice = createSlice({
             state.AllCompliants = action.payload
         })
         .addCase(getAllContact.rejected,(state,action)=>{
+            state.isError = true
+            state.isLoading = false
+            state.isSuccess = false
+            state.message =action.error
+        })
+       .addCase(getAllContactResolved.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(getAllContactResolved.fulfilled,(state,action)=>{
+            state.isError = false
+            state.isSuccess = true
+            state.isLoading = false
+            state.AllCompliantsResolved = action.payload
+        })
+        .addCase(getAllContactResolved.rejected,(state,action)=>{
             state.isError = true
             state.isLoading = false
             state.isSuccess = false

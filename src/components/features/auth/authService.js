@@ -40,6 +40,15 @@ const getContactService = async()=>{
     }
 }
 
+const getContactResolvedService = async()=>{
+    try {
+        const response = await axios.get(`${url}auth/getContactsResolved`)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
+
 const updateContactService = async (resolvedData)=>{
     try {
         console.log(resolvedData);
@@ -67,7 +76,8 @@ const authSerivces = {
     attendaceRegisterService,
     attendaceSaveService,
     getContactService,
-    updateContactService
+    updateContactService,
+    getContactResolvedService
 }
 
 export default authSerivces

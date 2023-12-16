@@ -22,6 +22,7 @@ import SuperUser from './components/pages/SuperUser';
 import AdminUserRegister from './components/pages/adminUserRegister';
 import PrivateRoutesAdminR from './components/PrivateRoutesAdminR';
 import PublicRoutes from './components/pages/PublicRoutes';
+import ContactPageResolved from './components/pages/ContactResolved';
 function App() {
   return (
     <>
@@ -33,7 +34,7 @@ function App() {
                 <Route path='/home' element={<Home/>}/>
                 <Route path='/codingchannels' element={<CodingChannels/>}/>
                 <Route path='/contact' element={<PrivateRoutes><Contact/></PrivateRoutes>}/>
-                <Route path='/team' element={<Team/>}/>
+                <Route path='/contactresolved' element={<PrivateRoutes><ContactPageResolved/></PrivateRoutes>}/>
                 <Route path='/superuser' element={<PrivateRoutes><SuperUser/></PrivateRoutes>}/>
                 <Route index path='/' element={<PublicRoutes><Login/></PublicRoutes>}/>
                 <Route path='/attendance' element={<PrivateRoutes><AttendancePage/></PrivateRoutes>}/>

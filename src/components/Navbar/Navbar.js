@@ -71,17 +71,6 @@ function NavBar() {
                 Complaints
               </NavLink>
             </li>
-            {/* <li className="nav-item">
-              <NavLink
-                exact
-                to="/team"
-                activeClassName="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-               Team
-              </NavLink>
-            </li> */}
            {localStorage.getItem('adminData') ? <li className="nav-item">
               <NavLink
                 exact
