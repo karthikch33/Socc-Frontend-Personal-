@@ -4,14 +4,22 @@ import { TbHandFinger } from "react-icons/tb";
 
 const Bulb = () => {
   const [isOn, setIsOn] = useState(false);
-  const {AllSessions} = useSelector(state=>state.admin)
-
-  useEffect(()=>{
-    if(AllSessions.length >=1 ){
-    localStorage.setItem('server',JSON.stringify({'server':'ON'}))
-     setIsOn(true)
+  const checkBulbStatus = async () => {
+    try {
+      const response = await fetch('https://soccpersonalbackend.onrender.com');
+      const data = await response.json();
+      localStorage.setItem('server',JSON.stringify({'server':'ON'}))
+      setIsOn(data.bulbStatus);
+    } catch (error) {
+      console.error('Error checking bulb status:', error);
     }
-  },[AllSessions])
+  };
+
+  useEffect(() => {
+    checkBulbStatus();
+    const intervalId = setInterval(checkBulbStatus, 60000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div className="container-xxl text-center">
