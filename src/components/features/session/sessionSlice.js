@@ -25,7 +25,7 @@ export const sessionRegister = createAsyncThunk('session/register',async(registe
 
 export const GetSessions = createAsyncThunk('session/allsession',async(thunkAPI)=>{
     try {
-        // return await adminServices.SessionsService();
+        return await adminServices.SessionsService();
     } catch (error) {
         return thunkAPI.rejectWithValue(error)
     }
