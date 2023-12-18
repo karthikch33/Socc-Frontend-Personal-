@@ -40,7 +40,7 @@ function App() {
                 <Route path='/attendance' element={<PrivateRoutes><AttendancePage/></PrivateRoutes>}/>
                 <Route path='/attendance/:id' element={<PrivateRoutes><Attendance/></PrivateRoutes>}/>
                 <Route path='/announcements' element={<Announcements/>}/>
-                <Route path='/adminsessionaddition' element={<AdminSessionAddition/>}/>
+                <Route path='/adminsessionaddition' element={<PrivateRoutes><AdminSessionAddition/></PrivateRoutes>}/>
                 <Route path='/adminuserRegister' element={<PrivateRoutesAdminR><AdminUserRegister/></PrivateRoutesAdminR>}/>
                 <Route path='/registrations/:id' element={<SessionRegistraion/>}/>
                 <Route path='/feedback/:id' element={<FeedBack/>}/>

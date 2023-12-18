@@ -1,11 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { TbHandFinger } from "react-icons/tb";
-import axios from 'axios'
-import { GetSessions } from '../features/session/sessionSlice';
+import { serverOnOrOff } from '../features/server/serverSlice';
 
 const Bulb = () => {
-  const [isOn, setIsOn] = useState(false);
+  const dispatch =useDispatch()
+  useEffect(() => {
+    const yourFunction = () => {
+      dispatch(serverOnOrOff());
+      console.log('server condition');
+    };
+
+    const intervalId = setInterval(yourFunction, 60000); 
+
+    return () => clearInterval(intervalId);
+  }, []); 
+
+  
   return (
     <div className="container-xxl text-center">
         <div className="row">
