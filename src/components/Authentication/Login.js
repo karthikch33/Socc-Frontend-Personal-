@@ -15,19 +15,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { LoginData } = useSelector((state) => state.admin);
-  const {AllSessions} = useSelector(state=>state.admin)
-
-
-  
-
-  useEffect(()=>{
-    if(!localStorage.getItem('server') && AllSessions.length>=1)
-      localStorage.setItem('server',JSON.stringify({server:'ON'}))
-    else
-      localStorage.removeItem('server')
-
-  },[AllSessions])
-
   useEffect(() => {
     if (LoginData && LoginData?.status === 201) {
       window.location.reload();
