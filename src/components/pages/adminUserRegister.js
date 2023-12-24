@@ -99,7 +99,7 @@ const AdminUserRegister = () => {
                 </div>
                 <div className="row">
                   <div className="col-12">
-                    <CustomtInput type="text" placeholder="Password" name="password" onChange={formik.handleChange('password')} values={formik.values.password}/>
+                    <CustomtInput type="password" placeholder="Password" name="password" onChange={formik.handleChange('password')} values={formik.values.password}/>
                     <div className="error">
                     {
                       formik.touched.password && formik.errors.password
