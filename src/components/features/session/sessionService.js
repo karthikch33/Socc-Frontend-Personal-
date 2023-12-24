@@ -39,6 +39,7 @@ export const getSuperUserToken = async(emailToken)=>{
 }
 
 export const adminRegisterService = async(registerData)=>{
+    console.log(registerData);
     const respsone = await axios.post(`${url}admin/adminregisterunknown`,registerData)
     return respsone.data
 }
