@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Image } from 'antd';
+import { Image, Table } from 'antd';
 import CardContainer from '../CardContainer';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetSessions } from '../features/session/sessionSlice';
+import { GetSession, GetSessions } from '../features/session/sessionSlice';
 import Loading from './Loading';
 import Meta from '../Meta';
+import { useLocation } from 'react-router-dom';
+import { attendance, getAllRegistersSlice } from '../features/auth/authSlice';
 
 const OngoingSessions = () => {
 
@@ -48,9 +50,9 @@ const OngoingSessions = () => {
       return <>
       <div className="row">
         <div className="col-12">
-          <div className="imgdiv">
+          <div className="imgdiv d-flex justify-content-center align-items-center">
             <Image
-              width={200}
+              style={{maxHeight:"300px",maxWidth:"250px",minHeight:"300px",minWidth:"250px"}}
               src={currentData?.images}
               className='img-fluid'
           />
@@ -84,7 +86,17 @@ const OngoingSessions = () => {
   </>
   }
 
+  const completeHistoryDescription = (currentData)=>{
+    return  <>
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis doloribus corporis tempora possimus, non voluptates quibusdam dolore eaque, similique obcaecati inventore, laborum corrupti odit labore. Porro suscipit doloremque laborum quod odio vitae sint consequatur?
+  </>
+  }
 
+  const { getAllRegisters } = useSelector((state) => state.auth);
+
+  const RegisterData = (sessiontitle)=>{
+    dispatch(getAllRegistersSlice(sessiontitle))
+}
 
   return (
     <div className='container-xxl'>
@@ -101,17 +113,18 @@ const OngoingSessions = () => {
             sessionsData.map(element => {
               const sessionDescription = completeSessionDescription(element);
               const outcomeDescription = completeOutComeDescription(element);
-              // const historyDescription = completeHistoryDescription(element);
-  
+              const historyDescription = completeHistoryDescription(element);
+              // const RegisterdDescription = RegisterData(element?.sessiontitle)
               return compareTwoDates(element?.date, date) ? (
-                <div key={element?._id} className="col-md-4 mb-4">
+                <div key={element?._id} className="col-md-6 mb-6">
                   <CardContainer
                     sessionDescription={sessionDescription}
                     outcomeDescription={outcomeDescription}
                     sessionId={element?._id}
                     sessiontitle={element?.sessiontitle}
                     today={true}
-                    // history={historyDescription}
+                    history={historyDescription}
+                    // RegisterData = {RegisterdDescription}
                   />
                 </div>
               ) : null;

@@ -31,8 +31,9 @@ const Footer = () => {
                 <h4>Social</h4>
                 <ul className='footer-icons d-flex flex-column'>
                  <Link to={"https://www.instagram.com/socc_klef/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA=="}><li><BsInstagram/><label className='mx-4'>Instagram</label></li></Link>
-                 <Link><li><BsLinkedin/><label className='mx-4'>LinkedIn</label></li></Link>
-                 <Link to={"https://t.me/+2zT7G-89XCw3OTc9"}><li><BiLogoTelegram/><label className='mx-4'>Telegram</label></li></Link>
+                 <Link to={"https://www.linkedin.com/company/school-ofcompetitive-coding/"
+                }><li><BsLinkedin/><label className='mx-4'>LinkedIn</label></li></Link>
+                 <Link to={"https://t.me/socctechclub"}><li><BiLogoTelegram/><label className='mx-4'>Telegram</label></li></Link>
                 </ul>
               </div>
               <div className="col-4">
@@ -41,7 +42,6 @@ const Footer = () => {
                 <Link to={'/'} ><li><BiLastPage/><label style={{cursor:"pointer"}} className='mx-4' onClick={handleScrollToTop}>Home</label></li></Link>
                  <Link to={'/contact'} ><li><BiLastPage/><label className='mx-4' style={{cursor:"pointer"}}
                  onClick={handleScrollToTop}>Contact</label></li></Link>
-                 <Link to={'/team'} ><li><BiLastPage/><label style={{cursor:"pointer"}} className='mx-4' onClick={handleScrollToTop}>Team</label></li></Link>
                  <Link to={'/sessions'} ><li><BiLastPage/><label style={{cursor:"pointer"}} onClick={handleScrollToTop}className='mx-4'>Sessions</label></li></Link>
                  <Link to={'/adminsessionaddition'} ><li><BiLastPage/><label style={{cursor:"pointer"}} onClick={handleScrollToTop}className='mx-4'>Session Addtion</label></li></Link>
                 </ul>

@@ -21,6 +21,16 @@ const attendaceRegisterService = async(EventName)=>{
     }
 }
 
+const getAllRegister = async(EventName)=>{
+    console.log(EventName);
+    try {
+        const response = await axios.post(`${url}auth/getallregister`,{sessiontitle:EventName})
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
 const attendaceSaveService = async(AttendedDetails)=>{
     try {
         const response = await axios.post(`${url}auth/attendancesave`,AttendedDetails)
@@ -77,7 +87,8 @@ const authSerivces = {
     attendaceSaveService,
     getContactService,
     updateContactService,
-    getContactResolvedService
+    getContactResolvedService,
+    getAllRegister
 }
 
 export default authSerivces

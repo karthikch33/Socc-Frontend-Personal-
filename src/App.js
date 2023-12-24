@@ -9,8 +9,6 @@ import Contact from './components/pages/Contact';
 import CodingChannels from './components/pages/CodingChannels';
 import AdminSessionAddition from './components/pages/adminSessionAddition';
 import Home from './components/pages/Home';
-import Team from './components/pages/Team';
-import { Helmet } from 'react-helmet-async';
 
 import Announcements from './components/pages/Announcements';
 import FeedBack from './components/pages/FeedBack';

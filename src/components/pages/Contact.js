@@ -111,12 +111,47 @@ const ContactPage = () => {
   }, [AllCompliants]);
 
   const dispatch = useDispatch();
+
+  const handleSearch = (e) => {
+    const searchValue = e.target.value.toLowerCase();
+    const newData = AllCompliants?.filter((ele, index) => {
+      return ele?.collegeId.toLowerCase().includes(searchValue);
+    }).map((filteredElement, filteredIndex) => {
+      return {
+        ...filteredElement,
+        sno: filteredIndex,
+        rmessage: (
+          <input
+            type='text'
+            name='resolvedMessage'
+            onChange={callme}
+            placeholder='Type Your Message'
+          />
+        ),
+        sendmail: (
+          <input
+            type='button'
+            className='btn btn-primary'
+            value='Resolve'
+            onClick={() => resolveThis(filteredElement?.uniqueCode)}
+          />
+        )
+      };
+    });
+    setData(newData);
+  };
   
   return (
     <Watermark content={''}>
       <Meta title={'Contact'} />
             <h2 className='text-center mb-4'>Complaints</h2>
       <div className='container-xxl mt-5'>
+        <div className="row">
+          <div className="col-12">
+            <label htmlFor="" className='me-4'>Search</label>
+            <input type='text' onChange={(e)=>handleSearch(e)} placeholder='Search By Id'/>
+          </div>
+        </div>
             <div className="row">
           <div className="col-12 d-flex justify-content-end">
            <Link to={'/contactresolved'} > <label htmlFor="" className='text-end'style={{cursor:'pointer'}} >Resolved Complients</label></Link>

@@ -58,12 +58,6 @@ const ContactPageResolved = () => {
   const { AllCompliantsResolved } = useSelector((state) => state.auth);
   const [data, setData] = useState([]);
 
- 
-
-  const callme = (e) => {
-    formik.values.resolvedMessage = e.target.value;
-  };
-
   useEffect(() => {
     if (Array.isArray(AllCompliantsResolved)) {
       const newData = AllCompliantsResolved
@@ -74,14 +68,28 @@ const ContactPageResolved = () => {
               sno: index,
             };
           }
-          return null; // This line is added to handle unresolved elements
+          return null; 
         })
-        .filter(Boolean); // Filter out null values (unresolved elements)
+        .filter(Boolean); 
 
       setData(newData.reverse());
     }
   }, [AllCompliantsResolved]);
 
+  const handleSearch = (e) => {
+    const searchValue = e.target.value.toLowerCase();
+    const newData = AllCompliantsResolved?.filter((ele, index) => {
+      return ele?.collegeId.toLowerCase().includes(searchValue);
+    }).map((filteredElement, filteredIndex) => {
+      return {
+        ...filteredElement,
+        sno: filteredIndex,
+      };
+    });
+    setData(newData);
+  };
+  
+  
   const dispatch = useDispatch();
   
   return (
@@ -96,6 +104,12 @@ const ContactPageResolved = () => {
            <Link to={'/contact'} > <label htmlFor="" className='text-end'style={{cursor:'pointer'}} > Complients</label></Link>
           </div>
         </div>
+          <div className='row'>
+              <div className="col-12">
+                <label htmlFor="" className='fs-3 my-3'>Search</label>
+                <input type="text" className='ms-2' placeholder='Search By Id' onChange={(e)=>handleSearch(e)}/>
+              </div>
+          </div>
             <Table columns={columns} dataSource={data} scroll={{ x: true }} />
           </div>
         </div>

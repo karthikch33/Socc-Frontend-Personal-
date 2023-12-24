@@ -61,6 +61,14 @@ export const attendance = createAsyncThunk('auth/attendance',async(EventName,thu
     }
 })
 
+export const getAllRegistersSlice = createAsyncThunk('auth/getAllRegisters',async(EventName,thunkAPI)=>{
+    try {
+        return await authSerivces.getAllRegister(EventName)
+    } catch (error) {
+       return thunkAPI.rejectWithValue(error)
+    }
+})
+
 export const attendanceSave = createAsyncThunk('auth/attendancesave',async(AttendedData,thunkAPI)=>{
     try {
         return await authSerivces.attendaceSaveService(AttendedData)
@@ -133,6 +141,23 @@ export const authSlice = createSlice({
             state.AttendanceRegister = action.payload        
         })
         .addCase(attendance.rejected,(state,action)=>{
+            state.isError = true
+            state.isLoading = false
+            state.isSuccess = false
+            state.message =action.error
+        })
+        builder.addCase(getAllRegistersSlice.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(getAllRegistersSlice.fulfilled,(state,action)=>{
+            state.isError = false
+            state.isSuccess = true
+            state.isLoading = false
+            state.AllRegisters = action.payload        
+        })
+        .addCase(getAllRegistersSlice.rejected,(state,action)=>{
             state.isError = true
             state.isLoading = false
             state.isSuccess = false

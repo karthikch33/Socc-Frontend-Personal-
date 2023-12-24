@@ -35,9 +35,6 @@ const PastSessions = () => {
     const date1 = new Date(x)
     const date2 = new Date(date)
 
-    console.log(x);
-    console.log(y);
-
     if (date1.getTime() <= date2.getTime()) {
         return true
       } else if (date1.getTime() > date2.getTime()) {
@@ -51,9 +48,9 @@ const PastSessions = () => {
       return <>
       <div className="row">
         <div className="col-12">
-          <div className="imgdiv">
+          <div className="imgdiv d-flex justify-content-center align-items-center">
             <Image
-              width={200}
+              style={{maxHeight:"250px",maxWidth:"250px",minHeight:"250px",minWidth:"250px"}}
               src={currentData?.images}
               className='img-fluid'
           />
@@ -111,7 +108,7 @@ const PastSessions = () => {
              const historyDescription = completeHistoryDescription(element);
  
              return compareTwoDates(element?.date, date) ? (
-               <div key={element?._id} className="col-md-4 mb-4">
+               <div key={element?._id} className="col-md-6 mb-6">
                  <CardContainer
                    sessionDescription={sessionDescription}
                    outcomeDescription={outcomeDescription}
