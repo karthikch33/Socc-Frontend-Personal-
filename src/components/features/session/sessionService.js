@@ -39,9 +39,18 @@ export const getSuperUserToken = async(emailToken)=>{
 }
 
 export const adminRegisterService = async(registerData)=>{
-    console.log(registerData);
     const respsone = await axios.post(`${url}admin/adminregisterunknown`,registerData)
     return respsone.data
+}
+
+export const forgotpasswordService = async(passwordData)=>{
+    const response = await axios.post(`${url}admin/forgotpassword`,passwordData)
+    return response.data
+}
+
+export const forgotpasswordverifyService = async(passwordVerifyData)=>{
+    const response = await axios.post(`${url}admin/forgotpasswordverify/${passwordVerifyData?.uniqToken}`,passwordVerifyData)
+    return response.data
 }
 
 // export const 
@@ -54,7 +63,9 @@ const sessionServices = {
     superUserMailGenerator,
     deleteSuperUserToken,
     getSuperUserToken,
-    adminRegisterService
+    adminRegisterService,
+    forgotpasswordService,
+    forgotpasswordverifyService
 }
 
 export default sessionServices

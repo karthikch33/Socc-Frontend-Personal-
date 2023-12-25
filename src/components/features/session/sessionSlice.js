@@ -12,6 +12,8 @@ const initialState = {
     Session:"",
     LoginData:'',
     EmailToken:'',
+    ForgotTokenUser:'',
+    ForgotToken:'',
     message:"",
 }
 
@@ -75,6 +77,23 @@ export const getEmailTokenSuperUser = createAsyncThunk('admin/getSuperUserToken'
 export const adminRegister = createAsyncThunk('admin/adminRegister',async(registerData,thunkAPI)=>{
     try {
         return await adminServices.adminRegisterService(registerData)
+    } catch (error) {
+        thunkAPI.rejectWithValue(error)
+    }
+})
+
+export const forgotpassword = createAsyncThunk('admin/forgotpassword',async(passwordData,thunkAPI)=>{
+    try {
+        return await adminServices.forgotpasswordService(passwordData)
+    } catch (error) {
+        thunkAPI.rejectWithValue(error)
+    }
+})
+
+export const forgotpasswordverify = createAsyncThunk('admin/forgotpasswordverify',async(passwordDataVerify,thunkAPI)=>{
+    try {
+        console.log(passwordDataVerify);
+        return await adminServices.forgotpasswordverifyService(passwordDataVerify)
     } catch (error) {
         thunkAPI.rejectWithValue(error)
     }
@@ -195,6 +214,40 @@ const sessionSlice = createSlice({
             state.isLoading = false;
         })
         .addCase(deleteEmailTokenSuperUser.rejected,(state,action)=>{
+            state.isError = true;
+            state.isSuccess = false;
+            state.isLoading = false
+            state.message = action.error
+        })
+        builder.addCase(forgotpassword.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(forgotpassword.fulfilled,(state,action)=>{
+            state.isError = false;
+            state.isSuccess = true;
+            state.isLoading = false;
+            state.ForgotTokenUser = action.payload
+        })
+        .addCase(forgotpassword.rejected,(state,action)=>{
+            state.isError = true;
+            state.isSuccess = false;
+            state.isLoading = false
+            state.message = action.error
+        })
+        builder.addCase(forgotpasswordverify.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(forgotpasswordverify.fulfilled,(state,action)=>{
+            state.isError = false;
+            state.isSuccess = true;
+            state.isLoading = false;
+            state.ForgotToken = action.payload
+        })
+        .addCase(forgotpasswordverify.rejected,(state,action)=>{
             state.isError = true;
             state.isSuccess = false;
             state.isLoading = false

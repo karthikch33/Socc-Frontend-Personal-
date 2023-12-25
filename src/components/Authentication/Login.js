@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import CustomInput from '../CustomtInput.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetSessions, adminLogin } from '../features/session/sessionSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 let schema = yup.object().shape({
   username: yup.string().required('UserName Required'),
@@ -61,9 +61,9 @@ const Login = () => {
             <div className='error'>{formik.touched.password && formik.errors.password}</div>
             <div className='row'>
               <div className='col-12 d-flex justify-content-between my-4'>
-                <label htmlFor='' className='text-dark'>
+                <Link to={'/forgotpassword'} className='text-dark'>
                   Forgot Password?
-                </label>
+                </Link>
               </div>
             </div>
             <button className='btn btn-primary my-4 btn-block' type='submit'>
