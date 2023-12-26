@@ -53,6 +53,11 @@ export const forgotpasswordverifyService = async(passwordVerifyData)=>{
     return response.data
 }
 
+export const resetPasswordService = async(passwordsData)=>{
+    const response = await axios.post(`${url}admin/resetpassword/${passwordsData?.uniqToken}`)
+    return response.data
+}
+
 // export const 
 
 const sessionServices = {
@@ -65,7 +70,8 @@ const sessionServices = {
     getSuperUserToken,
     adminRegisterService,
     forgotpasswordService,
-    forgotpasswordverifyService
+    forgotpasswordverifyService,
+    resetPasswordService
 }
 
 export default sessionServices

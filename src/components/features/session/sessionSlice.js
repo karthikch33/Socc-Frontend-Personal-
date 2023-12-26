@@ -92,8 +92,15 @@ export const forgotpassword = createAsyncThunk('admin/forgotpassword',async(pass
 
 export const forgotpasswordverify = createAsyncThunk('admin/forgotpasswordverify',async(passwordDataVerify,thunkAPI)=>{
     try {
-        console.log(passwordDataVerify);
         return await adminServices.forgotpasswordverifyService(passwordDataVerify)
+    } catch (error) {
+        thunkAPI.rejectWithValue(error)
+    }
+})
+
+export const resetPassword = createAsyncThunk('admin/resetpassword',async(passwordsData,thunkAPI)=>{
+    try {
+        return await adminServices.resetPasswordService(passwordsData)
     } catch (error) {
         thunkAPI.rejectWithValue(error)
     }
@@ -150,6 +157,22 @@ const sessionSlice = createSlice({
             state.Session = action.payload
         })
         .addCase(GetSession.rejected,(state,action)=>{
+            state.isError = true;
+            state.isSuccess = false;
+            state.isLoading = false
+            state.message = action.error
+        })
+        builder.addCase(resetPassword.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(resetPassword.fulfilled,(state,action)=>{
+            state.isError = false;
+            state.isSuccess = true;
+            state.isLoading = false;
+        })
+        .addCase(resetPassword.rejected,(state,action)=>{
             state.isError = true;
             state.isSuccess = false;
             state.isLoading = false
