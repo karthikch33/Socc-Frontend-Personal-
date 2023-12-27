@@ -54,7 +54,7 @@ export const forgotpasswordverifyService = async(passwordVerifyData)=>{
 }
 
 export const resetPasswordService = async(passwordsData)=>{
-    const response = await axios.post(`${url}admin/resetpassword/${passwordsData?.uniqToken}`)
+    const response = await axios.post(`${url}admin/resetpassword/${passwordsData?.uniqToken}`,passwordsData)
     return response.data
 }
 
