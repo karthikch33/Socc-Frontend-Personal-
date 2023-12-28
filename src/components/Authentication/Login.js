@@ -41,7 +41,7 @@ const Login = () => {
     <div className='container'>
       <div className='row justify-content-center align-items-center' style={{ height: '100vh' }}>
         <div className='col-md-6'>
-          <form className='marquee p-5 my-5' onSubmit={formik.handleSubmit}>
+          <form className='marquee bg-white p-5 my-5' style={{borderRadius:"30px"}} onSubmit={formik.handleSubmit}>
             <h4 className='text-center text-success fs-2'>Admin User</h4>
             <CustomInput
               type='text'
