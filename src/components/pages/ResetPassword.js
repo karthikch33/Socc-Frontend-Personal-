@@ -1,10 +1,10 @@
 import { useFormik } from 'formik'
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import * as yup from 'yup'
 import { resetPassword } from '../features/session/sessionSlice'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 
 let schema = yup.object().shape({
@@ -15,6 +15,7 @@ let schema = yup.object().shape({
 const ResetPassword = () => {
   const dispatch = useDispatch()
   const location = useLocation().pathname.split('/')[2]
+  const {ResetPasswordStatus} = useSelector(state=>state.admin)
   const formik = useFormik({
     initialValues:{
       password:'',
@@ -32,6 +33,11 @@ const ResetPassword = () => {
       }
     }
   })
+  const navigate = useNavigate()
+  useEffect(()=>{
+    if(ResetPasswordStatus === true)
+      navigate('/')
+    },[ResetPasswordStatus])
   return (
     <div className='container-xxl'>
         <div className="row d-flex justify-content-center align-items-center my-5">

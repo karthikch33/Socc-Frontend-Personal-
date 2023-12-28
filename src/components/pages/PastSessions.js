@@ -80,13 +80,12 @@ const PastSessions = () => {
 
   const completeOutComeDescription = (currentData)=>{
     return  <>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis doloribus corporis tempora possimus, non voluptates quibusdam dolore eaque, similique obcaecati inventore, laborum corrupti odit labore. Porro suscipit doloremque laborum quod odio vitae sint consequatur?
+     
   </>
   }
 
   const completeHistoryDescription = (currentData)=>{
     return  <>
-        i am Pavn Aditya
   </>
   }
 

@@ -81,23 +81,20 @@ const OngoingSessions = () => {
   }
 
   const completeOutComeDescription = (currentData)=>{
-    return  <>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis doloribus corporis tempora possimus, non voluptates quibusdam dolore eaque, similique obcaecati inventore, laborum corrupti odit labore. Porro suscipit doloremque laborum quod odio vitae sint consequatur?
-  </>
+    return  <p className='fs-4 my-4 p-4'dangerouslySetInnerHTML={{__html:currentData?.outcomes}}>
+  </p>
   }
 
   const completeHistoryDescription = (currentData)=>{
     return  <>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis doloribus corporis tempora possimus, non voluptates quibusdam dolore eaque, similique obcaecati inventore, laborum corrupti odit labore. Porro suscipit doloremque laborum quod odio vitae sint consequatur?
+    <div className='row d-inline'>
+      <p className='fs-3 text-success'>Points For Registration:  <span>{currentData?.silincrease}</span></p>
+    </div>
+    <div className='row d-inline'>
+      <p className='fs-3 text-danger'>Penalty Points:  <span>{currentData?.sildecrease}</span></p>
+    </div>
   </>
   }
-
-  const { getAllRegisters } = useSelector((state) => state.auth);
-
-  const RegisterData = (sessiontitle)=>{
-    dispatch(getAllRegistersSlice(sessiontitle))
-}
-
   return (
     <div className='container-xxl'>
       <Meta title={'Sessions'}/>
@@ -114,7 +111,6 @@ const OngoingSessions = () => {
               const sessionDescription = completeSessionDescription(element);
               const outcomeDescription = completeOutComeDescription(element);
               const historyDescription = completeHistoryDescription(element);
-              // const RegisterdDescription = RegisterData(element?.sessiontitle)
               return compareTwoDates(element?.date, date) ? (
                 <div key={element?._id} className="col-md-6 mb-6">
                   <CardContainer
@@ -124,7 +120,6 @@ const OngoingSessions = () => {
                     sessiontitle={element?.sessiontitle}
                     today={true}
                     history={historyDescription}
-                    // RegisterData = {RegisterdDescription}
                   />
                 </div>
               ) : null;

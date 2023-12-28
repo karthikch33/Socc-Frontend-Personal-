@@ -21,7 +21,7 @@ const Footer = () => {
                 <h4>Explore</h4>
                 <ul className='footer-icons'>
                 <Link to={'/codingchannels'}><li><BiLastPage/><label className='mx-4' style={{cursor:"pointer"}} onClick={handleScrollToTop}>Coding Channels </label></li></Link>
-                 <Link to={'/team'}><li><BiLastPage/><label className='mx-4' style={{cursor:"pointer"}} onClick={handleScrollToTop}>Team</label></li></Link>
+                 <Link to={'/fetchRegister'}><li><BiLastPage/><label className='mx-4' style={{cursor:"pointer"}} onClick={handleScrollToTop}>FetchRegisters</label></li></Link>
                  <Link to={'/announcements'} onClick={handleScrollToTop}><li><BiLastPage/><label className='mx-4' style={{cursor:"pointer"}}>Announcements</label></li></Link>
                  <Link to={'/sessions'} onClick={handleScrollToTop}><li><BiLastPage/><label className='mx-4' style={{cursor:"pointer"}}> Registrations</label></li></Link>
                  <Link to={'/superuser'} ><li><BiLastPage/><label style={{cursor:"pointer"}} onClick={handleScrollToTop}className='mx-4'>SuperUser</label></li></Link>

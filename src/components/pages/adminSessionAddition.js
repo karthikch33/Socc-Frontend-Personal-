@@ -6,6 +6,8 @@ import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import CustomAlert from '../CustomAlert'
 import { sessionRegister } from '../features/session/sessionSlice'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const AdminSessionAddition = () => {
 
@@ -32,16 +34,6 @@ const AdminSessionAddition = () => {
         }
     },[AlreadyRegistered])
 
-
-    const handleFileChange = event => {
-        const selectedFile = event.currentTarget.files[0];
-    
-        console.log('File Name:', selectedFile.name);
-        console.log('File Type:', selectedFile.type);
-    
-        formik.setFieldValue('images', selectedFile);
-      };
-
     const formik = useFormik({
         initialValues:{
             sessiontitle:"",
@@ -49,13 +41,18 @@ const AdminSessionAddition = () => {
             venue:'',
             startAt:'',
             ends:'',
-            images:''
+            images:'',
+            outcomes:'',
+            sildecrease:'',
+            silincrease:'',
+            instructor:'',
+            manager:'',
+            strength:''
         },
         validationSchema:schema,
         onSubmit:(values)=>{    
             console.log(values);
             dispatch(sessionRegister(values))
-            // formik.resetForm()
         }
     })
 
@@ -68,6 +65,7 @@ const AdminSessionAddition = () => {
                 <form action=""  className='my-4 submit-form' onSubmit={formik.handleSubmit}>
                     <CustomAlert/>
                 <h4 className='fs-2'>Session Addition Page</h4>
+                <h6 className='fs-4 mt-5'>Prliminary Information</h6>
                 <CustomtInput type="text" placeholder="Enter Session Title" name='sessiontitle' onChange={formik.handleChange('sessiontitle')} value={formik.values.sessiontitle}/>
                 <div className="error">
                     {
@@ -108,7 +106,24 @@ const AdminSessionAddition = () => {
                     }
                 </div>
 
-                <button className='btn btn-warning text-dark' type='submit'>Add Session</button>
+                <h4 className='my-5'>Outcomes Information</h4>
+                
+                <ReactQuill theme="snow" value={formik.values.outcomes} name='outcomes' onChange={formik.handleChange('outcomes')} className='my-2'/>
+
+                <h4 className='my-5'>SIL Points</h4>
+
+                <CustomtInput type="number" placeholder="Enter Session Register Points" name="silincrease" onChange={formik.handleChange('silincrease')} value={formik.values.silincrease}/>
+                <CustomtInput type="number" placeholder="Enter Session UnRegister Points" name="sildecrease" onChange={formik.handleChange('sildecrease')} value={formik.values.sildecrease}/>
+
+                <h4 className='my-5'>Session Content</h4>
+
+                <CustomtInput type="text" placeholder="Session Instructor" name="instructor" value={formik.values.instructor} onChange={formik.handleChange('instructor')}/>
+                <CustomtInput type="text" placeholder="Session Manager" name="manager" value={formik.values.manager} onChange={formik.handleChange('manager')}/>
+                <CustomtInput type="number" placeholder="Session Strength" name="strength" value={formik.values.strength} onChange={formik.handleChange('strength')}/>
+
+                <div className="d-flex justify-content-center align-items-center">
+                <button className='btn btn-info text-white w-100 fs-5' type='submit'>Add Session</button>
+                </div>
                 </form>
             </div>
         </div>

@@ -24,6 +24,8 @@ import ContactPageResolved from './components/pages/ContactResolved';
 import ForgotPassword from './components/pages/ForgotPassword';
 import EmailForPass from './components/pages/EmailForPass';
 import ResetPassword from './components/pages/ResetPassword';
+import PrivateForgotPassword from './components/pages/PrivateForgotPassword';
+import FetchRegisters from './components/pages/FetchRegisters';
 function App() {
   return (
     <>
@@ -41,9 +43,10 @@ function App() {
                 <Route path='/attendance' element={<PrivateRoutes><AttendancePage/></PrivateRoutes>}/>
                 <Route path='/attendance/:id' element={<PrivateRoutes><Attendance/></PrivateRoutes>}/>
                 <Route path='/announcements' element={<Announcements/>}/>
-                <Route path='/forgotpassword' element={<ForgotPassword/>}/>
-                <Route path='/emailforgotpassword/:id' element={<EmailForPass/>}/>
-                <Route path='/resetpassword/:id' element={<ResetPassword/>}/>
+                <Route path='/fetchRegister' element={<PrivateRoutes><FetchRegisters/></PrivateRoutes>}/>
+                <Route path='/forgotpassword' element={<PrivateForgotPassword><ForgotPassword/></PrivateForgotPassword>}/>
+                <Route path='/emailforgotpassword/:id' element={<PrivateForgotPassword><EmailForPass/></PrivateForgotPassword>}/>
+                <Route path='/resetpassword/:id' element={<PrivateForgotPassword><ResetPassword/></PrivateForgotPassword>}/>
                 <Route path='/adminsessionaddition' element={<PrivateRoutes><AdminSessionAddition/></PrivateRoutes>}/>
                 <Route path='/adminuserRegister' element={<PrivateRoutesAdminR><AdminUserRegister/></PrivateRoutesAdminR>}/>
                 <Route path='/registrations/:id' element={<SessionRegistraion/>}/>

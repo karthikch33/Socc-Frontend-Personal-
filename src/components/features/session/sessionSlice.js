@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import adminServices from "./sessionService";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from 'react-router-dom'
 
 const initialState = {
     isError:false,
@@ -13,6 +13,7 @@ const initialState = {
     LoginData:'',
     EmailToken:'',
     ForgotTokenUser:'',
+    ResetPasswordStatus:false,
     ForgotToken:'',
     message:"",
 }
@@ -98,10 +99,7 @@ export const forgotpasswordverify = createAsyncThunk('admin/forgotpasswordverify
     }
 })
 
-const Navigator = ()=>{
-    const navigate  = useNavigate();
-    navigate('/login')
-}
+
 
 export const resetPassword = createAsyncThunk('admin/resetpassword',async(passwordsData,thunkAPI)=>{
     try {
@@ -179,7 +177,8 @@ const sessionSlice = createSlice({
             if(action.payload?.status === 201)
             {
                 toast.success('Password Updated ')
-                Navigator()
+            //    return <Navigate to='/'/>
+                state.ResetPasswordStatus = true
             }
             else
             toast.error('Password Not Updated')

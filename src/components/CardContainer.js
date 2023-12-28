@@ -15,34 +15,16 @@ const tabList = [
     },
     {
       key: 'tab3',
-      tab: 'History',
-    },
-    {
-      key: 'tab4',
-      tab: 'Registered List',
-    },
+      tab: 'Points',
+    }
   ];
-
-  const columns = [
-    {
-      title: 'S NO',
-      dataIndex: 'sno',
-    },
-    {
-      title: 'Id',
-      dataIndex: 'Id',
-    },
-  ];
-
-  
 
 const CardContainer = (props) => {
   const {sessionDescription,outcomeDescription,sessionId,sessiontitle,today,history,RegisteredData} = props
     const contentList = {
         tab1: sessionDescription,
         tab2: outcomeDescription,
-        tab3: today ? "":history,
-        tab4:<Table columns={columns} dataSource={RegisteredData} />
+        tab3: history,
       };
 
       const [activeTabKey1, setActiveTabKey1] = useState('tab1');
@@ -62,7 +44,8 @@ const CardContainer = (props) => {
         }}
         title= {sessiontitle}
         extra={<Link to={today === true?`/registrations/${sessionId}`:`/feedback/${sessionId}`}>{today?"Register Here":"Submit FeedBack"}</Link>}
-        tabList={tabList.filter((element)=>today?element?.tab!=="History":element?.tab)}
+        // tabList={tabList.filter((element)=>today?element?.tab!=="Outcomes":element?.tab)}
+        tabList={tabList}
         activeTabKey={activeTabKey1}
         onTabChange={onTab1Change}
       >

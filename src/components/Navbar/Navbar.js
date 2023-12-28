@@ -94,6 +94,15 @@ function NavBar() {
               >
                Login
               </NavLink></li>}
+              <li className="nav-item">
+              <NavLink
+                to="/profile"
+                activeClassName="active"
+                onClick={handleClick}
+              >
+                <img src="http://res.cloudinary.com/dpkdi73b4/image/upload/v1701939540/uo6fzhhmmlwicq6dnsma.jpg" alt="" className="img-fluid" width={50} height={50} style={{borderRadius:"50%"}}/>
+              </NavLink>
+            </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
             {click ? (
