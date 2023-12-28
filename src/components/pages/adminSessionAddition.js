@@ -62,7 +62,7 @@ const AdminSessionAddition = () => {
     <div className='container-xxl'>
         <div className="row">
             <div className="col-12">
-                <form action=""  className='my-4 submit-form' onSubmit={formik.handleSubmit}>
+                <form action=""  className='my-4 submit-form bg-white' onSubmit={formik.handleSubmit}>
                     <CustomAlert/>
                 <h4 className='fs-2'>Session Addition Page</h4>
                 <h6 className='fs-4 mt-5'>Prliminary Information</h6>

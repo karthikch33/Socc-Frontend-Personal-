@@ -92,7 +92,7 @@ const SessionRegistraion = () => {
         <div className="row">
             <div className="col-12">
                 {
-             <form action="" className='my-4 submit-form' onSubmit={formik.handleSubmit}>
+             <form action="" className='my-4 submit-form bg-white' onSubmit={formik.handleSubmit}>
                         <h4>{`${Session?.sessiontitle} Registrations `}</h4>
                         <CustomtInput type="text" placeholder="Enter Your Id" name='registerid' onChange={formik.handleChange('registerid')} value={formik.values.registerid}/>
 

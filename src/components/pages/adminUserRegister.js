@@ -44,7 +44,7 @@ const AdminUserRegister = () => {
           <h3 className='text-center fs-3 my-4'>Admin User Registration</h3>
         </div>
       </div>
-      <div className="row d-flex justify-content-between align-items-center">
+      <div className="row d-flex justify-content-between bg-white align-items-center">
         <div className="col-8 ">
             <form onSubmit={formik.handleSubmit} className='submit-form'>
                 <div className="row">
