@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { Card, Table } from 'antd';
+import { Tilt } from 'react-tilt'
 import { useDispatch, useSelector } from 'react-redux';
 import { attendance, getAllRegistersSlice } from './features/auth/authSlice';
 
@@ -19,6 +20,9 @@ const tabList = [
     }
   ];
 
+ 
+  
+
 const CardContainer = (props) => {
   const {sessionDescription,outcomeDescription,sessionId,sessiontitle,today,history,RegisteredData} = props
     const contentList = {
@@ -32,6 +36,7 @@ const CardContainer = (props) => {
       const onTab1Change = (key) => {
         setActiveTabKey1(key);
       };
+      
       
   return (
     <div className="row my-4">
@@ -48,6 +53,7 @@ const CardContainer = (props) => {
         tabList={tabList}
         activeTabKey={activeTabKey1}
         onTabChange={onTab1Change}
+        className='card'
       >
         {contentList[activeTabKey1]}
       </Card>

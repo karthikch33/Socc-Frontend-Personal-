@@ -35,12 +35,12 @@ const PastSessions = () => {
     const date1 = new Date(x)
     const date2 = new Date(date)
 
-    if (date1.getTime() <= date2.getTime()) {
+    if (date1.getTime() < date2.getTime()) {
         return true
       } else if (date1.getTime() > date2.getTime()) {
         return false
       } else {
-        return true
+        return false
       }
   }
 
@@ -107,7 +107,7 @@ const PastSessions = () => {
              const historyDescription = completeHistoryDescription(element);
  
              return compareTwoDates(element?.date, date) ? (
-               <div key={element?._id} className="col-md-6 mb-6">
+               <div key={element?._id} className="col-md-4 mb-4">
                  <CardContainer
                    sessionDescription={sessionDescription}
                    outcomeDescription={outcomeDescription}

@@ -24,7 +24,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="row" style={{background:"#f8f9f7"}}>
+          <div className="row">
             <div className="col-12">
               <h3 className='text-center fs-1 fw-bolder my-5'>Popular Languages</h3>
               <div className='d-flex flex-wrap justify-content-center'>
@@ -39,14 +39,14 @@ const Home = () => {
             </div>
         </div>
           
-        <div className="row"style={{background:"#f8f9f7"}}>
+        <div className="row">
           <div className="col-12">
             <h3 className='text-center fs-1 fw-bolder my-5'>Coding Platforms </h3>
               <Platforms/>
           </div>
         </div>
               
-        <div className="row" style={{background:"#f8f9f7"}}>
+        <div className="row" >
             <div className="col-12">
               <h3 className='text-center fs-1 fw-bolder my-5'>Memories</h3>
                     <SwiperContainer/>

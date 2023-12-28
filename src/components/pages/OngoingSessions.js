@@ -37,7 +37,7 @@ const OngoingSessions = () => {
     const date1 = new Date(x)
     const date2 = new Date(date)
 
-    if (date1.getTime() <= date2.getTime()) {
+    if (date1.getTime() < date2.getTime()) {
         return false
       } else if (date1.getTime() >= date2.getTime()) {
         return true
@@ -80,27 +80,40 @@ const OngoingSessions = () => {
     </>
   }
 
-  const completeOutComeDescription = (currentData)=>{
-    return  <p className='fs-4 my-4 p-4'dangerouslySetInnerHTML={{__html:currentData?.outcomes}}>
-  </p>
+  const completeOutComeDescription = (currentData) => {
+    return (
+      <p className='fs-6 my-4 p-4 animated slide-up fadeIn swift-up-text' dangerouslySetInnerHTML={{__html: currentData?.outcomes}}>
+      </p>
+    );
   }
-
-  const completeHistoryDescription = (currentData)=>{
-    return  <>
-    <div className='row d-inline'>
-      <p className='fs-3 text-success'>Points For Registration:  <span>{currentData?.silincrease}</span></p>
-    </div>
-    <div className='row d-inline'>
-      <p className='fs-3 text-danger'>Penalty Points:  <span>{currentData?.sildecrease}</span></p>
-    </div>
-  </>
+  
+  
+  const completeHistoryDescription = (currentData) => {
+    return (
+      <>
+        <div className='row d-inline animated fadeIn' style={{ marginBottom: '10px' }}>
+          <p className='fs-5 text-success'>
+            <span style={{ fontWeight: 'bold', marginRight: '10px', color: '#28a745' }}>Points For Registration:</span>
+            <span style={{ color: '#000' }}>{currentData?.silincrease}</span>
+          </p>
+        </div>
+        <div className='row d-inline animated fadeIn' style={{ marginBottom: '10px' }}>
+          <p className='fs-5 text-danger'>
+            <span style={{ fontWeight: 'bold', marginRight: '10px', color: '#dc3545' }}>Penalty Points:</span>
+            <span style={{ color: '#000' }}>{currentData?.sildecrease}</span>
+          </p>
+        </div>
+      </>
+    );
   }
+  
+  
   return (
     <div className='container-xxl'>
       <Meta title={'Sessions'}/>
       <div className="row">
         <div className="col-12">
-          <h4 className='fs-2 fw-bold my-4'>Upcoming Sessions</h4>
+          <h4 className='fs-2 fw-bold my-4 text-white'>Upcoming Sessions</h4>
         </div>
       </div>
       {
@@ -112,7 +125,7 @@ const OngoingSessions = () => {
               const outcomeDescription = completeOutComeDescription(element);
               const historyDescription = completeHistoryDescription(element);
               return compareTwoDates(element?.date, date) ? (
-                <div key={element?._id} className="col-md-6 mb-6">
+                <div key={element?._id} className="col-md-4 mb-4">
                   <CardContainer
                     sessionDescription={sessionDescription}
                     outcomeDescription={outcomeDescription}

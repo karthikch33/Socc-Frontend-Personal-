@@ -4,6 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { GetSession } from '../features/session/sessionSlice';
+import { Typeahead } from 'react-bootstrap-typeahead';
 import { getAllRegistersSlice } from '../features/auth/authSlice';
 
 const FetchRegisters = () => {
