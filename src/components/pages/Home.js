@@ -7,6 +7,7 @@ import HexagonData from '../static/HexagonData'
 import Meta from '../Meta'
 import { useDispatch } from 'react-redux'
 import { GetSessions } from '../features/session/sessionSlice'
+import TimerComponentForServer from './TimerComponentForServer'
 
 
 const Home = () => {
@@ -35,6 +36,7 @@ const Home = () => {
                  </div>
                 })
               }
+              {/* <TimerComponentForServer/> */}
                </div>
             </div>
         </div>
