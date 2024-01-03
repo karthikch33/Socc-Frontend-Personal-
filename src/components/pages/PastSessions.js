@@ -79,14 +79,29 @@ const PastSessions = () => {
   }
 
   const completeOutComeDescription = (currentData)=>{
-    return  <>
-     
-  </>
+    return (
+      currentData?.outcomes? <p className='fs-6 my-4 p-4 animated slide-up fadeIn swift-up-text' dangerouslySetInnerHTML={{__html: currentData?.outcomes}}>
+      </p>:<p className='fs-1 text-center'>N/A</p>
+    );
   }
 
   const completeHistoryDescription = (currentData)=>{
-    return  <>
-  </>
+    return (
+      <>
+        <div className='row d-inline animated fadeIn' style={{ marginBottom: '10px' }}>
+          <p className='fs-5 text-success'>
+            <span style={{ fontWeight: 'bold', marginRight: '10px', color: '#28a745' }}>Points For Registration:</span>
+            <span style={{ color: '#000' }}>{currentData?.silincrease?currentData?.silincrease:'N/A'}</span>
+          </p>
+        </div>
+        <div className='row d-inline animated fadeIn' style={{ marginBottom: '10px' }}>
+          <p className='fs-5 text-danger'>
+            <span style={{ fontWeight: 'bold', marginRight: '10px', color: '#dc3545' }}>Penalty Points:</span>
+            <span style={{ color: '#000' }}>{currentData?.sildecrease?currentData?.sildecrease:'N/A'}</span>
+          </p>
+        </div>
+      </>
+    );
   }
 
   return (

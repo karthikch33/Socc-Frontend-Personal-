@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TbHandFinger } from "react-icons/tb";
 import { serverOnOrOff } from '../features/server/serverSlice';
-import TimerComponent from './TimerComponent'
 import LoadingDots from './LoadingDots';
 
 const Bulb = () => {

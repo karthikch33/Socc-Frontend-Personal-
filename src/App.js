@@ -26,6 +26,7 @@ import EmailForPass from './components/pages/EmailForPass';
 import ResetPassword from './components/pages/ResetPassword';
 import PrivateForgotPassword from './components/pages/PrivateForgotPassword';
 import FetchRegisters from './components/pages/FetchRegisters';
+import Profile from './components/pages/Profile';
 function App() {
   return (
     <>
@@ -37,6 +38,7 @@ function App() {
                 <Route path='/home' element={<Home/>}/>
                 <Route path='/codingchannels' element={<CodingChannels/>}/>
                 <Route path='/contact' element={<PrivateRoutes><Contact/></PrivateRoutes>}/>
+                <Route path='/profile' element={<PrivateRoutes><Profile/></PrivateRoutes>}/>
                 <Route path='/contactresolved' element={<PrivateRoutes><ContactPageResolved/></PrivateRoutes>}/>
                 <Route path='/superuser' element={<PrivateRoutes><SuperUser/></PrivateRoutes>}/>
                 <Route index path='/' element={<PublicRoutes><Login/></PublicRoutes>}/>

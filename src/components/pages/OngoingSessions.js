@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Table } from 'antd';
+import { Image } from 'antd';
 import CardContainer from '../CardContainer';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetSession, GetSessions } from '../features/session/sessionSlice';
+import { GetSessions } from '../features/session/sessionSlice';
 import Loading from './Loading';
 import Meta from '../Meta';
-import { useLocation } from 'react-router-dom';
-import { attendance, getAllRegistersSlice } from '../features/auth/authSlice';
 
 const OngoingSessions = () => {
 
