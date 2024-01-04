@@ -10,6 +10,7 @@
     "antd": "^5.11.1",
     "aos": "^2.3.4",
     "axios": "^1.6.1",
+    "cookie-parser": "^1.4.6",
     "express-async-handler": "^1.2.0",
     "express-handlebars": "^7.1.2",
     "formik": "^2.4.5",
