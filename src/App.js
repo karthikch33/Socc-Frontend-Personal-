@@ -27,6 +27,7 @@ import ResetPassword from './components/pages/ResetPassword';
 import PrivateForgotPassword from './components/pages/PrivateForgotPassword';
 import FetchRegisters from './components/pages/FetchRegisters';
 import Profile from './components/pages/Profile';
+import KnowYourIP from './components/pages/KnowYourIP';
 function App() {
   return (
     <>
@@ -47,6 +48,7 @@ function App() {
                 <Route path='/announcements' element={<Announcements/>}/>
                 <Route path='/fetchRegister' element={<PrivateRoutes><FetchRegisters/></PrivateRoutes>}/>
                 <Route path='/forgotpassword' element={<PrivateForgotPassword><ForgotPassword/></PrivateForgotPassword>}/>
+                <Route path='/ip' element={<PrivateRoutes><KnowYourIP/></PrivateRoutes>}/>
                 <Route path='/emailforgotpassword/:id' element={<PrivateForgotPassword><EmailForPass/></PrivateForgotPassword>}/>
                 <Route path='/resetpassword/:id' element={<PrivateForgotPassword><ResetPassword/></PrivateForgotPassword>}/>
                 <Route path='/adminsessionaddition' element={<PrivateRoutes><AdminSessionAddition/></PrivateRoutes>}/>

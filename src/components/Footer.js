@@ -44,6 +44,7 @@ const Footer = () => {
                  onClick={handleScrollToTop}>Contact</label></li></Link>
                  <Link to={'/sessions'} ><li><BiLastPage/><label style={{cursor:"pointer"}} onClick={handleScrollToTop}className='mx-4'>Sessions</label></li></Link>
                  <Link to={'/adminsessionaddition'} ><li><BiLastPage/><label style={{cursor:"pointer"}} onClick={handleScrollToTop}className='mx-4'>Session Addtion</label></li></Link>
+                 <Link to={'/ip'} ><li><BiLastPage/><label style={{cursor:"pointer"}} onClick={handleScrollToTop}className='mx-4'>Know Your Ip</label></li></Link>
                 </ul>
               </div>
          </div>
