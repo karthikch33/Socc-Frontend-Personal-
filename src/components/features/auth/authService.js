@@ -31,6 +31,8 @@ const getAllRegister = async(EventName)=>{
     }
 }
 
+
+
 const attendaceSaveService = async(AttendedDetails)=>{
     try {
         const response = await axios.post(`${url}auth/attendancesave`,AttendedDetails)

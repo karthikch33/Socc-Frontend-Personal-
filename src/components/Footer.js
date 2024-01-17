@@ -3,7 +3,8 @@ import '../App.css'
 import {BsInstagram} from 'react-icons/bs'
 import {AiFillCopyrightCircle} from 'react-icons/ai'
 import {BiLogoTelegram,BiLastPage} from 'react-icons/bi'
-import {BsFillTelephoneFill,BsLinkedin} from 'react-icons/bs'
+import {BsLinkedin} from 'react-icons/bs'
+import { RiWechatPayLine } from "react-icons/ri";
 import { Link } from 'react-router-dom'
 const Footer = () => {
   const handleScrollToTop = () => {
@@ -34,6 +35,7 @@ const Footer = () => {
                  <Link to={"https://www.linkedin.com/company/school-ofcompetitive-coding/"
                 }><li><BsLinkedin/><label className='mx-4'>LinkedIn</label></li></Link>
                  <Link to={"https://t.me/socctechclub"}><li><BiLogoTelegram/><label className='mx-4'>Telegram</label></li></Link>
+                 <Link to={"/wechat"} style={{cursor:"pointer"}}><li><RiWechatPayLine /><label className='mx-4'>WeChat</label></li></Link>
                 </ul>
               </div>
               <div className="col-4">

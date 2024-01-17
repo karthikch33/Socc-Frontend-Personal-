@@ -9,7 +9,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Bulb from './pages/Bulb';
 const Layout = () => {
-  document.addEventListener('contextmenu', event => event.preventDefault());
+  // document.addEventListener('contextmenu', event => event.preventDefault());
   useEffect(()=>{
       AOS.init()
   })

@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import adminServices from "./sessionService";
 import { toast } from "react-toastify";
-import { Navigate } from 'react-router-dom'
 
 const initialState = {
     isError:false,
@@ -15,6 +14,9 @@ const initialState = {
     ForgotTokenUser:'',
     ResetPasswordStatus:false,
     ForgotToken:'',
+    adminsData:"",
+    messageAdded:"",
+    adminChat:"",
     message:"",
 }
 
@@ -39,6 +41,31 @@ export const GetSession = createAsyncThunk('session/getsession',async(sessionId,
         return await adminServices.SessionService(sessionId)
     } catch (error) {
         return thunkAPI.rejectWithValue(error)
+    }
+})
+
+export const GetAllAdmins = createAsyncThunk('admin/getalladmins',async(thunkAPI)=>{
+    try {
+        return await adminServices.getAllAdmins()
+    } catch (error) {
+        thunkAPI.rejectWithValue(error)
+    }
+})
+
+export const GetAdminChat = createAsyncThunk('admin/getadminchat',async(message,thunkAPI)=>{
+    try {
+        console.log(message);
+        return await adminServices.getAdminChatService(message)        
+    } catch (error) {
+        thunkAPI.rejectWithValue(error)
+    }
+})
+
+export const addMessageToChat = createAsyncThunk('admin/addmessagechat',async(data,thunkAPI)=>{
+    try {
+        return await adminServices.addAdminMessageToChat(data)
+    } catch (error) {
+        thunkAPI.rejectWithValue(error)
     }
 })
 
@@ -160,6 +187,57 @@ const sessionSlice = createSlice({
             state.Session = action.payload
         })
         .addCase(GetSession.rejected,(state,action)=>{
+            state.isError = true;
+            state.isSuccess = false;
+            state.isLoading = false
+            state.message = action.error
+        })
+        builder.addCase(GetAdminChat.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(GetAdminChat.fulfilled,(state,action)=>{
+            state.isError = false;
+            state.isSuccess = true;
+            state.isLoading = false;
+            state.adminChat = action.payload
+        })
+        .addCase(GetAdminChat.rejected,(state,action)=>{
+            state.isError = true;
+            state.isSuccess = false;
+            state.isLoading = false
+            state.message = action.error
+        })
+        builder.addCase(addMessageToChat.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(addMessageToChat.fulfilled,(state,action)=>{
+            state.isError = false;
+            state.isSuccess = true;
+            state.isLoading = false;
+            state.messageAdded = action.payload
+        })
+        .addCase(addMessageToChat.rejected,(state,action)=>{
+            state.isError = true;
+            state.isSuccess = false;
+            state.isLoading = false
+            state.message = action.error
+        })
+        builder.addCase(GetAllAdmins.pending,(state)=>{
+            state.isError = false;
+            state.isLoading = true;
+            state.isSuccess = false;
+        })
+        .addCase(GetAllAdmins.fulfilled,(state,action)=>{
+            state.isError = false;
+            state.isSuccess = true;
+            state.isLoading = false;
+            state.adminsData = action.payload
+        })
+        .addCase(GetAllAdmins.rejected,(state,action)=>{
             state.isError = true;
             state.isSuccess = false;
             state.isLoading = false

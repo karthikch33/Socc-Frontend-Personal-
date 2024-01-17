@@ -69,6 +69,8 @@ export const getAllRegistersSlice = createAsyncThunk('auth/getAllRegisters',asyn
     }
 })
 
+
+
 export const attendanceSave = createAsyncThunk('auth/attendancesave',async(AttendedData,thunkAPI)=>{
     try {
         return await authSerivces.attendaceSaveService(AttendedData)

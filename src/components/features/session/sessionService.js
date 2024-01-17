@@ -23,6 +23,11 @@ export const adminLoginService = async(loginData)=>{
     return response.data
 }
 
+const getAllAdmins = async()=>{
+    const response = await axios.get(`${url}admin/getalladmins`)
+    return response.data
+}
+
 export const superUserMailGenerator = async(emailToken)=>{
     const response = await axios.post(`${url}admin/sendtokenforsuperuser`,{token:emailToken})
     return response.data
@@ -58,6 +63,16 @@ export const resetPasswordService = async(passwordsData)=>{
     return response.data
 }
 
+const getAdminChatService = async(username)=>{
+    const response = await axios.post(`${url}admin/getmessage`,username)
+    return response.data
+}
+
+const addAdminMessageToChat = async(message)=>{
+    const response = await axios.post(`${url}admin/addmessage`,message)
+    return response.data
+}
+
 // export const 
 
 const sessionServices = {
@@ -71,7 +86,10 @@ const sessionServices = {
     adminRegisterService,
     forgotpasswordService,
     forgotpasswordverifyService,
-    resetPasswordService
+    resetPasswordService,
+    addAdminMessageToChat,
+    getAllAdmins,
+    getAdminChatService
 }
 
 export default sessionServices

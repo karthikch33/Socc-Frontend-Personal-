@@ -28,6 +28,7 @@ import PrivateForgotPassword from './components/pages/PrivateForgotPassword';
 import FetchRegisters from './components/pages/FetchRegisters';
 import Profile from './components/pages/Profile';
 import KnowYourIP from './components/pages/KnowYourIP';
+import AdminChat from './components/pages/AdminChat';
 function App() {
   return (
     <>
@@ -45,6 +46,9 @@ function App() {
                 <Route index path='/' element={<PublicRoutes><Login/></PublicRoutes>}/>
                 <Route path='/attendance' element={<PrivateRoutes><AttendancePage/></PrivateRoutes>}/>
                 <Route path='/attendance/:id' element={<PrivateRoutes><Attendance/></PrivateRoutes>}/>
+                <Route path='/wechat' element={<PrivateRoutes><AdminChat/></PrivateRoutes>}>
+                  <Route path='/wechat/chatcontent/:id' element={<PrivateRoutes><AdminChat/></PrivateRoutes>}/>
+                </Route>
                 <Route path='/announcements' element={<Announcements/>}/>
                 <Route path='/fetchRegister' element={<PrivateRoutes><FetchRegisters/></PrivateRoutes>}/>
                 <Route path='/forgotpassword' element={<PrivateForgotPassword><ForgotPassword/></PrivateForgotPassword>}/>
