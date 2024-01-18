@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { GetAdminChat, addMessageToChat } from '../features/session/sessionSlice';
@@ -23,10 +23,12 @@ const ChatContent = () => {
     const { userMessages = [], oppositeUserMessages = [] } = typeof adminChat === 'object' ? adminChat : {};
     setUserChat(userMessages)
     setOppositeChat(oppositeUserMessages)
+    scrollToLastMessage();
   }, [adminChat]);
 
   useEffect(() => {
    dispatch(GetAdminChat({ username:JSON.parse(localStorage.getItem('adminData'))?.username,oppositeUsername:getChatId}));
+   scrollToLastMessage();
   }, [messageAdded]);
 
 
@@ -45,6 +47,15 @@ const ChatContent = () => {
     }
   };
 
+  const chatContainerRef = useRef(null);
+
+  const scrollToLastMessage = () => {
+    if (chatContainerRef.current) {
+      setTimeout(() => {
+        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      }, 0);
+    }
+  };
 
   return (
     <div className="row">
@@ -56,7 +67,7 @@ const ChatContent = () => {
         <div className="chatcontenttopright"></div>
       </div>
       <div className="row messages">
-        <div className="col-12 ">
+        <div className="col-12 " ref={chatContainerRef} style={{ overflowY: 'auto', maxHeight: '400px' }}>
         {Array.isArray(allMessages) &&
   allMessages.map((elem, i) => (
     <div key={i} className="w-100">
