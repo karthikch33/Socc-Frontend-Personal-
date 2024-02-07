@@ -1,9 +1,9 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-
+import cookies from '../cookies'
 const PublicRoutes = ({children}) => {
-    const getTokenFromLocalStorage = JSON.parse(localStorage.getItem('adminData'))
-    return getTokenFromLocalStorage === null ? children : (<><Navigate to={'/home'} replace={true}/></>)
+    const getTokenFromCookies = cookies.get('adminData')
+    return getTokenFromCookies === undefined ? children : (<><Navigate to={'/home'} replace={true}/></>)
 }
 
 export default PublicRoutes

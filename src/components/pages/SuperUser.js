@@ -6,7 +6,7 @@ import { deleteEmailTokenSuperUser, emailTokenSuperUser, getEmailTokenSuperUser 
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { resetState } from '../features/auth/authSlice.js'
-
+import cookies from '../cookies.js'
 const SuperUser = () => {
     const dispatch = useDispatch()
     const formik = useFormik({
@@ -27,7 +27,10 @@ const SuperUser = () => {
             dispatch(deleteEmailTokenSuperUser(formik.values.emailGenToken))
             formik.resetForm()
             navigate('/adminuserRegister')
-            localStorage.setItem('email',JSON.stringify({Text:'Yes Login'}))
+            cookies.set('email',{Text:'Yes Login'},{
+                expires: new Date(Date.now()+ 90 * 1000 )
+            })
+            localStorage.setItem('EmailTimeLoggedIn',new Date(Date.now()))
             dispatch(resetState())
         }
     },[EmailToken])

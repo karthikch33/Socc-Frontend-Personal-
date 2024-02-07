@@ -17,8 +17,8 @@ const Login = () => {
   const { LoginData } = useSelector((state) => state.admin);
   useEffect(() => {
     if (LoginData && LoginData?.status === 201) {
-      window.location.reload();
       navigate('/home');
+      window.location.reload();
     }
   }, [LoginData]);
 

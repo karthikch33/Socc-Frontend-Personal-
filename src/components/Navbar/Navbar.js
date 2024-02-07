@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
-import { CodeIcon, HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
+import cookies from "../cookies";
+import { HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
 
 function NavBar() {
   const [click, setClick] = useState(false);
 
   const handleLogOut = ()=>{
     handleClick()
-    localStorage.removeItem('adminData')
-    localStorage.removeItem('server')
-    localStorage.removeItem('email')
+    console.log('hi');
+    localStorage.clear()
+    cookies.remove('adminData')
+    window.location.reload()
   }
 
 
@@ -73,7 +75,7 @@ function NavBar() {
                 Complaints
               </NavLink>
             </li>
-           {localStorage.getItem('adminData') ? <li className="nav-item">
+           {cookies.get('adminData') ? <li className="nav-item">
               <NavLink
                 exact
                 to="/"

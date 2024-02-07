@@ -858,6 +858,10 @@ a{
   align-items: center;
 }
 
+.transparent-bg {
+  background-color: transparent !important; /* Important to override Bootstrap's default styles */
+}
+
 .chatcontent{
   display: flex;
   flex-direction: column;

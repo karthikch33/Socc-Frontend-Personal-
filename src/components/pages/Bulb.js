@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { serverOnOrOff } from '../features/server/serverSlice';
 import LoadingDots from './LoadingDots';
+import cookies from '../cookies';
 
 const Bulb = () => {
   const dispatch =useDispatch()
+  const [once,setOnce] = useState(false)
   useEffect(() => {
     yourFunction()
     const intervalId = setInterval(yourFunction, 50000); 
     return () => clearInterval(intervalId);
   }, []); 
 
+  
   
   const yourFunction = () => {
     dispatch(serverOnOrOff());

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import adminServices from "./sessionService";
 import { toast } from "react-toastify";
+import cookies from "../../cookies";
 
 const initialState = {
     isError:false,
@@ -280,7 +281,10 @@ const sessionSlice = createSlice({
             if(action.payload?.status === 201)
             {
                 toast.success("Login Sucess")
-                localStorage.setItem('adminData',JSON.stringify(action.payload))
+                cookies.set('adminData',action.payload,{
+                    expires:new Date(Date.now()+ 600000)
+                })
+                localStorage.setItem('Time LoggedIn',Date(Date.now()))
             }
             else if(action.payload?.status === 305)
             {
