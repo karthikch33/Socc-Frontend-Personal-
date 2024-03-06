@@ -30,6 +30,7 @@ import Profile from './components/pages/Profile';
 import KnowYourIP from './components/pages/KnowYourIP';
 import AdminChat from './components/pages/AdminChat';
 function App() {
+  // Git Hub URL Updated
   return (
     <>
       <BrowserRouter>
