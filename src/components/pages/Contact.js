@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { contact, getAllContact, updateContact } from '../features/auth/authSlice';
 import { toast } from 'react-toastify';
 import Meta from '../Meta';
+import cookies from '../cookies'
 import { Link } from 'react-router-dom';
 
 let schema = yup.object().shape({
@@ -61,11 +62,12 @@ const ContactPage = () => {
   const [data, setData] = useState([]);
 
   const resolveThis = (unqCode) => {
-    const sendAllData = {
+   const currentadmin = cookies.get('adminData')?.username
+        const sendAllData = {
       uniqueCode: unqCode,
       resolvedMessage: formik.values.resolvedMessage,
-      resolvedBy: localStorage.getItem('adminData')
-        ? JSON.parse(localStorage.getItem('adminData'))?.username
+      resolvedBy: cookies.get('adminData')?.status === 201
+        ? currentadmin
         : 'N/A'
     };
     dispatch(updateContact(sendAllData));

@@ -6,7 +6,7 @@ const Banner = () => {
                 <div className="container">
                     <div className="row row align-items-center">
                         <div className="col-lg-5 offset-lg-1 order-lg-1 floating-image">
-                            <img src="https://www.markuptag.com/images/web-development-vector.png" className="img-fluid" alt="Web Development" />
+                            <img src="https://res.cloudinary.com/ddkdeeue3/image/upload/v1727075571/cog7lae9yf7gqpysscmn.png" className="img-fluid" alt="Web Development" width="700px" />
                         </div>
                         <div className="col-lg-6">
                             <h1 className="mt-3">School Of Competitive Coding</h1>

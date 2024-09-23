@@ -62,7 +62,7 @@ const ContactPageResolved = () => {
     if (Array.isArray(AllCompliantsResolved)) {
       const newData = AllCompliantsResolved
         .map((ele, index) => {
-          if (ele?.resolved) {
+          if (ele?.resolved){
             return {
               ...ele,
               sno: index,

@@ -5,7 +5,6 @@ import url from "../../utils/base_url";
 const registrationService = async(registerdata)=>{
     try {
         const response = await axios.post(`${url}auth/register`, registerdata);
-        console.log("Server Response:", response);
         return response.data;
     } catch (error) {
         return error.response.data
@@ -22,7 +21,6 @@ const attendaceRegisterService = async(EventName)=>{
 }
 
 const getAllRegister = async(EventName)=>{
-    console.log(EventName);
     try {
         const response = await axios.post(`${url}auth/getallregister`,{sessiontitle:EventName})
         return response
@@ -63,7 +61,6 @@ const getContactResolvedService = async()=>{
 
 const updateContactService = async (resolvedData)=>{
     try {
-        console.log(resolvedData);
         const response = await axios.post(`${url}auth/updatecontact`,resolvedData)
         return response.data
     } catch (error) {

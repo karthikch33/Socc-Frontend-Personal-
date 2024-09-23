@@ -81,7 +81,6 @@ export const attendanceSave = createAsyncThunk('auth/attendancesave',async(Atten
 
 export const updateContact = createAsyncThunk('auth/updateContact',async(resolvedData,thunkAPI)=>{
     try {
-        console.log(resolvedData);
         return await authSerivces.updateContactService(resolvedData)
     } catch (error) {
        return thunkAPI.rejectWithValue(error)
@@ -92,7 +91,6 @@ export const authSlice = createSlice({
     name:"auth",
     initialState:intialState,
     reducers:{
-        
     },
     extraReducers:(builder)=>{
         builder.addCase(registrationSlice.pending,(state)=>{

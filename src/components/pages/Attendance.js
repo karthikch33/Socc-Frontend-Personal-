@@ -87,6 +87,8 @@ const Attendance = () => {
     }
   }, [AttendanceRegister]);
 
+  // spread operator like fullobject and want to add another column named watch = const newobj = {...fulllobject,watch:"fastrack"}
+
 
   const handleCheckboxChange = (record, field, value) => {
     // console.log(value);

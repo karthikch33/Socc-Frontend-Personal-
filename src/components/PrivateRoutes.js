@@ -5,8 +5,6 @@ import cookies from './cookies'
 
 const PrivateRoutes = ({children}) => {
     const getTokenFromCookies = cookies.get('adminData')
-    console.log("hi");
-    console.log(getTokenFromCookies);
     // const getTokenFromLocalStorage = JSON.parse(localStorage.getItem('adminData'))
     return getTokenFromCookies !== undefined ? children : (<>{toast.error('Login Required')}<Navigate to={'/'} replace={true}/></>)
 }
