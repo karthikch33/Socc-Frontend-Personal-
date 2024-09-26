@@ -47,12 +47,12 @@ const Home = () => {
           </div>
         </div>
               
-        <div className="row" >
+        {/* <div className="row" >
             <div className="col-12">
               <h3 className='text-center fs-1 fw-bolder my-5'>Memories</h3>
                     <SwiperContainer/>
             </div>
-        </div>
+        </div> */}
     </div>
     </>
   )

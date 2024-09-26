@@ -108,7 +108,17 @@ const AdminSessionAddition = () => {
 
                 <h4 className='my-5'>Outcomes Information</h4>
                 
-                <ReactQuill theme="snow" value={formik.values.outcomes} name='outcomes' onChange={formik.handleChange('outcomes')} className='my-2'/>
+                <textarea
+                className="form-control my-4 CustomtInput"
+                name="outcomes"
+                rows="4"
+                placeholder="Use(%%) for table formation"
+                value={formik.values.outcomes}
+                onChange={formik.handleChange('outcomes')}
+                required
+              ></textarea>
+
+                <span style={{color:"red"}}>use(%%) of table formation for each line </span>
 
                 <h4 className='my-5'>SIL Points</h4>
 

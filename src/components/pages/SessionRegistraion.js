@@ -31,8 +31,8 @@ const SessionRegistraion = () => {
                 },3500) 
                 dispatch(resetState())
             }
-            else if(AlreadyRegisterd?.message === "Registration Completed For this Id"){
-                toast.error("Registration Completed For This ID ")
+            else if(AlreadyRegisterd?.message){
+                toast.error(AlreadyRegisterd?.message)
                 dispatch(resetState())
             }
     },[AlreadyRegisterd,dispatch,navigate])

@@ -5,7 +5,7 @@ const HexagonData = [
     },
     {
         language:"PYTHON",
-        logo:"https://itel.com.sg/wp-content/uploads/2019/04/python.png"
+        logo:"https://res.cloudinary.com/ddkdeeue3/image/upload/v1727152024/otwfl5c5pk7e7lhvexn0.jpg"
     },
     {
         language:"C++",

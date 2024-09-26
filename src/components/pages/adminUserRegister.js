@@ -10,33 +10,46 @@ import TimerComponent from './TimerComponent'
 let schema = yup.object().shape({
     firstname:yup.string().required('FirstName Required'),
     lastname:yup.string().required('LastName Required'),
-    email:yup.string().required('Email Required'),
-    phone:yup.string().required('Phone Required'),
-    username:yup.string().required('Username Required'),
-    password:yup.string().required('Password Required'),
+
+    email: yup.string()
+    .email('Enter a valid email')
+    .matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Email must be a valid @gmail.com address')
+    .required('Email is required'),
+
+  phone: yup.string()
+    .matches(/^\d{10}$/, 'Phone number must be exactly 10 digits')
+    .required('Phone is required'),
+
+  username: yup.string()
+    .min(4, 'Username must be at least 4 characters')
+    .matches(/^\S*$/, 'Username should not contain spaces')
+    .required('Username is required'),
+
+  password: yup.string()
+    .min(6, 'Password must be at least 6 characters long')
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character')
+    .required('Password is required'),
 })
 
 const AdminUserRegister = () => {
   const dispatch = useDispatch()
+
   const formik = useFormik({
     initialValues:{
       firstname:'',
-      lastname:"",
-      email:"",
-      phone:"",
-      username:"",
-      password:"",
+      lastname:'',
+      email:'',
+      phone:'',
+      username:'',
+      password:'',
     },
-    enableReinitialize:true,
     validationSchema:schema,
     onSubmit:(values)=>{
-        dispatch(adminRegister(values))
-        formik.resetForm()
+      dispatch(adminRegister(values))
+      formik.resetForm()
     }
   })
-  const callOnce = ()=>{
-    formik.resetForm()
-  }
+ 
   return (
     <div className='container-xxl'>
       <div className="row">
@@ -49,7 +62,7 @@ const AdminUserRegister = () => {
             <form onSubmit={formik.handleSubmit} className='submit-form'>
                 <div className="row">
                   <div className="col-12">
-                    <CustomtInput type="text" placeholder="Username" name="username" onChange={formik.handleChange('username')} values={formik.values.username}/>
+                    <CustomtInput type="text" placeholder="Username" name="username" onChange={formik.handleChange('username')} value={formik.values.username}/>
                     <div className="error">
                     {
                       formik.touched.username && formik.errors.username
@@ -59,7 +72,7 @@ const AdminUserRegister = () => {
                 </div>
                 <div className="row">
                   <div className="col-12">
-                    <CustomtInput type="text" placeholder="Firstname" name="firstname" onChange={formik.handleChange('firstname')} values={formik.values.firstname}/>
+                    <CustomtInput type="text" placeholder="Firstname" name="firstname" onChange={formik.handleChange('firstname')} value={formik.values.firstname}/>
                     <div className="error">
                     {
                       formik.touched.firstname && formik.errors.firstname
@@ -69,7 +82,7 @@ const AdminUserRegister = () => {
                 </div>
                 <div className="row">
                   <div className="col-12">
-                    <CustomtInput type="text" placeholder="Lastname" name="lastname" onChange={formik.handleChange('lastname')} values={formik.values.lastname}/>
+                    <CustomtInput type="text" placeholder="Lastname" name="lastname" onChange={formik.handleChange('lastname')} value={formik.values.lastname}/>
                     <div className="error">
                     {
                       formik.touched.lastname && formik.errors.lastname
@@ -79,7 +92,7 @@ const AdminUserRegister = () => {
                 </div>
                 <div className="row">
                   <div className="col-12">
-                    <CustomtInput type="text" placeholder="Email" name="email" onChange={formik.handleChange('email')} values={formik.values.email}/>
+                    <CustomtInput type="text" placeholder="Email" name="email" onChange={formik.handleChange('email')} value={formik.values.email}/>
                     <div className="error">
                     {
                       formik.touched.email && formik.errors.email
@@ -89,7 +102,7 @@ const AdminUserRegister = () => {
                 </div>
                 <div className="row">
                   <div className="col-12">
-                    <CustomtInput type="text" placeholder="Phone" name="phone" onChange={formik.handleChange('phone')} values={formik.values.phone}/>
+                    <CustomtInput type="text" placeholder="Phone" name="phone" onChange={formik.handleChange('phone')} value={formik.values.phone}/>
                     <div className="error">
                     {
                       formik.touched.phone && formik.errors.phone
@@ -99,7 +112,7 @@ const AdminUserRegister = () => {
                 </div>
                 <div className="row">
                   <div className="col-12">
-                    <CustomtInput type="password" placeholder="Password" name="password" onChange={formik.handleChange('password')} values={formik.values.password}/>
+                    <CustomtInput type="password" placeholder="Password" name="password" onChange={formik.handleChange('password')} value={formik.values.password}/>
                     <div className="error">
                     {
                       formik.touched.password && formik.errors.password

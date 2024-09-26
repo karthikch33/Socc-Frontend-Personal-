@@ -12,6 +12,7 @@ const initialState = {
     Session:"",
     LoginData:'',
     EmailToken:'',
+    EmailToast:'',
     ForgotTokenUser:'',
     ResetPasswordStatus:false,
     ForgotToken:'',
@@ -306,12 +307,37 @@ const sessionSlice = createSlice({
             state.isError = false;
             state.isLoading = true;
             state.isSuccess = false;
+            state.EmailToast = toast.loading("Generating Token")
         })
         .addCase(emailTokenSuperUser.fulfilled,(state,action)=>{
             state.isError = false;
             state.isSuccess = true;
             state.isLoading = false;
-            toast.success('Token Generated ')
+            
+            if(action?.payload?.status === 201){
+                toast.update(state.EmailToast, {
+                    render: action?.payload?.message,
+                    type: toast.TYPE.SUCCESS,
+                    isLoading: false, 
+                    autoClose: 3000,
+                });
+            }
+            else if(action?.payload?.status === 404 || action?.payload?.status === 409){
+                toast.update(state.EmailToast, {
+                    render: action?.payload?.message,
+                    type: toast.TYPE.WARNING,
+                    isLoading: false, 
+                    autoClose: 3000,
+                });
+            }
+            else{
+                toast.update(state.EmailToast, {
+                    render: "Unexpected Error",
+                    type: toast.TYPE.ERROR,
+                    isLoading: false, 
+                    autoClose: 3000,
+                });
+            }
         })
         .addCase(emailTokenSuperUser.rejected,(state,action)=>{
             state.isError = true;
@@ -397,6 +423,7 @@ const sessionSlice = createSlice({
             state.isError = false;
             state.isSuccess = true;
             state.isLoading = false;
+            
             if(action.payload?.status === 201)
             {
                 toast.success('Admin Register Successfull')

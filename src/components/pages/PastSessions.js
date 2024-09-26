@@ -79,10 +79,56 @@ const PastSessions = () => {
   }
 
   const completeOutComeDescription = (currentData)=>{
+
+    const outcome = currentData?.outcomes || ""
+
+    const splitOutcome = outcome.split('%%').map(str=>str.trim())
     return (
-      currentData?.outcomes? <p className='fs-6 my-4 p-4 animated slide-up fadeIn swift-up-text' dangerouslySetInnerHTML={{__html: currentData?.outcomes}}>
-      </p>:<p className='fs-1 text-center'>N/A</p>
+      <>
+      <h2
+          style={{
+            textAlign: "center",
+            marginBottom: "20px",
+            // marginTop: "20px",
+            fontFamily: "monospace",
+            fontSize: "24px",
+            color: "#333",
+          }}
+        >
+          Topics Specified
+        </h2>
+      <div style={{ overflowY: "scroll", height: "400px", padding: "20px" }}>
+        
+    
+        <ol style={{ listStyleType: "none", padding: 0, margin: 0 }}>
+          {splitOutcome.map((item, index) => (
+            <li
+              key={index}
+              style={{
+                backgroundColor: "#fff",
+                padding: "15px",
+                margin: "10px 0",
+                borderRadius: "8px",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+              }}
+            >
+              <span
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "18px",
+                  color: "#333",
+                }}
+              >
+                {item}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </div>
+      </>
     );
+    
   }
 
   const completeHistoryDescription = (currentData)=>{
@@ -104,6 +150,97 @@ const PastSessions = () => {
     );
   }
 
+  const completeSessionOrganizer  = (currentData)=>{
+    return (
+      <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:"400px",maxHeight:"400px"}}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "100px",
+            padding: "20px",
+            // backgroundColor: "#f9f9f9",
+            borderRadius: "10px",
+            // boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            fontFamily: "'Helvetica Neue', Arial, sans-serif",
+            maxWidth: "400px",
+            margin: "0 auto"
+          }}
+        >
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <label
+              htmlFor=""
+              style={{
+                fontSize: "16px",
+                fontWeight: "bold",
+                color: "#333",
+                marginRight: "10px"
+              }}
+            >
+             Instructor:
+            </label>
+            <span
+              style={{
+                fontSize: "16px",
+                color: "#007BFF",
+                fontWeight: "500",
+              }}
+            >
+              {currentData?.instructor || "N/A"}
+            </span>
+          </div>
+    
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <label
+              htmlFor=""
+              style={{
+                fontSize: "16px",
+                fontWeight: "bold",
+                color: "#333",
+                marginRight: "10px"
+              }}
+            >
+              Session Manager:
+            </label>
+            <span
+              style={{
+                fontSize: "16px",
+                color: "#007BFF",
+                fontWeight: "500",
+              }}
+            >
+              {currentData?.manager || "N/A"}
+            </span>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <label
+              htmlFor=""
+              style={{
+                fontSize: "16px",
+                fontWeight: "bold",
+                color: "#333",
+                marginRight: "10px"
+              }}
+            >
+              Strength Remaining:
+            </label>
+            <span
+              style={{
+                fontSize: "16px",
+                color: "#007BFF",
+                fontWeight: "500",
+              }}
+            >
+              {currentData?.strength || 0}
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+    
+  }
+
   return (
     <div className='container-xxl'>
       <Meta title={'Sessions'}/>
@@ -120,6 +257,7 @@ const PastSessions = () => {
              const sessionDescription = completeSessionDescription(element);
              const outcomeDescription = completeOutComeDescription(element);
              const historyDescription = completeHistoryDescription(element);
+             const organizerDescription = completeSessionOrganizer(element);
  
              return compareTwoDates(element?.date, date) ? (
                <div key={element?._id} className="col-md-4 mb-4">
@@ -130,6 +268,7 @@ const PastSessions = () => {
                    sessiontitle={element?.sessiontitle}
                    today={false}
                    history={historyDescription}
+                   organizer = {organizerDescription}
                  />
                </div>
              ) : null;
