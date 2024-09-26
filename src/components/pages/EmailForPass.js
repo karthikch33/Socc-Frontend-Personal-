@@ -52,7 +52,7 @@ const EmailForPass = () => {
     <div className="container-xxl">
       <div className="row d-flex justify-content-center align-items-md-center">
         <div className="col-6">
-          <form className="marquee p-5 my-5" onSubmit={formik.handleSubmit}>
+          <form className="p-5 my-5 CustomtInput bg-white" onSubmit={formik.handleSubmit} style={{borderRadius:"5%"}}>
             <h3 className="form-label">Password Reset Token</h3>
             <div className="row my-3">
                 {contextHolder}
@@ -61,6 +61,7 @@ const EmailForPass = () => {
                 value={formik.values.token}
                 onChange={formik.handleChange('token')}
                 name='token'
+                className="CustomtInput"
                 placeholder='OTP'
                 style={{padding:"20px"}}
               />

@@ -23,6 +23,25 @@ const ForgotPassword = () => {
   const {ForgotTokenUser} = useSelector(state=>state.admin)
     const navigate = useNavigate()
 
+    useEffect(() => {
+      
+      window.history.pushState(null, null, window.location.href);
+  
+      const handlePopState = (event) => {
+       
+        window.history.pushState(null, null, window.location.href);
+      };
+  
+     
+      window.addEventListener('popstate', handlePopState);
+  
+  
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+      };
+    }, []);
+
+
     useEffect(()=>{
         if(ForgotTokenUser?.status === 201)
         {
@@ -61,7 +80,7 @@ const ForgotPassword = () => {
     <div className="container-xxl">
       <div className="row d-flex justify-content-center align-items-md-center">
         <div className="col-6">
-          <form className="marquee p-5 my-5" onSubmit={formik.handleSubmit}>
+          <form className="CustomtInput bg-white p-5 my-5" onSubmit={formik.handleSubmit} style={{borderRadius:"5%"}}>
             <h3 className="form-label">Forgot Password</h3>
             <div className="row my-3">
               <input
@@ -69,6 +88,7 @@ const ForgotPassword = () => {
                 value={formik.values.email}
                 onChange={formik.handleChange('email')}
                 name='email'
+                className="CustomtInput"
                 placeholder='Email'
                 style={{padding:"20px"}}
               />
@@ -79,7 +99,7 @@ const ForgotPassword = () => {
                         }
                 </div>
                 {contextHolder}
-            <input type="submit" className="my-3 btn btn-primary"/>
+            <input type="submit" className="my-3 btn btn-primary" value={'Search'}/>
           </form>
         </div>
       </div>

@@ -8,7 +8,10 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 
 let schema = yup.object().shape({
-  password:yup.string().required('Password Required'),
+  password: yup.string()
+    .min(6, 'Password must be at least 6 characters long')
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character')
+    .required('Password is required'),
   password2:yup.string().required('REenter Password')
 })
 
@@ -40,12 +43,13 @@ const ResetPassword = () => {
     },[ResetPasswordStatus])
   return (
     <div className='container-xxl'>
-        <div className="row d-flex justify-content-center align-items-center my-5">
-          <div className="col-6">
+        <div className="row d-flex justify-content-center  align-items-center my-5">
+
+          <div className="col-6 ">
               <h3 className='fs-1 my-3'>Reset Password</h3>
-              <form onSubmit={formik.handleSubmit} className='marquee p-5'>
+              <form onSubmit={formik.handleSubmit} className='form-control p-5 CustomtInput' style={{borderRadius:"5%"}}>
               <div className="row my-3">
-                <input type='text' placeholder='New Password'name='password' value={formik.values.password} onChange={formik.handleChange('password')}  className='form-control p-4'/>
+                <input type='text' placeholder='New Password'name='password' value={formik.values.password} onChange={formik.handleChange('password')}  className='form-control p-4 CustomtInput'/>
                 <div className="error">
                   {
                     formik.touched.password && formik.errors.password
@@ -53,14 +57,14 @@ const ResetPassword = () => {
                 </div>
               </div>
               <div className="row my-3">
-                <input type='text' placeholder='Renter Your Password' value={formik.values.password2} name='password2'onChange={formik.handleChange('password2')} className='form-control p-4'/>
+                <input type='text' placeholder='Renter Your Password' value={formik.values.password2} name='password2'onChange={formik.handleChange('password2')} className='form-control p-4 CustomtInput'/>
                 <div className="error">
                   {
                     formik.touched.password2 && formik.errors.password2
                   }
                 </div>
               </div>
-                  <input type="submit" value={'Create'} className='btn btn-primary'/>
+                  <input type="submit" value={'Update'} className='btn btn-primary'/>
               </form>
 
           </div>

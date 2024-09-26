@@ -631,7 +631,9 @@ a{
 
 .marquee{
   outline: none;
-  box-shadow: 0 0 20px rgba(81, 203, 238, 0.7);
+  box-shadow: 0 0 20px rgba(238, 94, 81, 0.7);
+  background-color: white;
+  /* border-radius: 5%; */
   animation: glowing 1.5s infinite;
 }
 
