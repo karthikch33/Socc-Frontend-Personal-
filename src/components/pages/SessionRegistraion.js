@@ -17,7 +17,10 @@ const SessionRegistraion = () => {
     const {Session} = useSelector(state=>state.admin)
 
     let schema = yup.object().shape({
-        registerid:yup.string().required('Registration Id Is Required'),
+        registerid: yup.string()
+        .required('Registration Id is Required')
+        .length(10, 'Length must be exactly 10 characters')
+        .matches(/^(22000|23000|24000|21000)\d{5}$/, 'Must start with 22000, 23000, 24000 or 21000'),
         year:yup.number().required('Select Your Year'),
         registername: yup.string().required('Name is Required')
     })
@@ -25,14 +28,12 @@ const SessionRegistraion = () => {
     useEffect(()=>{
              if(AlreadyRegisterd?.registerid !== undefined)
             {
-                toast.success('Registration Successfull And Mail Has Been Generated')
                 setTimeout(()=>{
                     navigate('/sessions')
                 },3500) 
                 dispatch(resetState())
             }
             else if(AlreadyRegisterd?.message){
-                toast.error(AlreadyRegisterd?.message)
                 dispatch(resetState())
             }
     },[AlreadyRegisterd,dispatch,navigate])
@@ -94,6 +95,7 @@ const SessionRegistraion = () => {
                 {
              <form action="" className='my-4 submit-form bg-white' onSubmit={formik.handleSubmit}>
                         <h4>{`${Session?.sessiontitle} Registrations `}</h4>
+                        <span style={{border:"1px solid black",padding:"4px",borderRadius:"50%"}}>{`${Session?.strength}`}</span> Strength Remaining
                         <CustomtInput type="text" placeholder="Enter Your Id" name='registerid' onChange={formik.handleChange('registerid')} value={formik.values.registerid}/>
 
 
@@ -117,6 +119,7 @@ const SessionRegistraion = () => {
                             <option value={1}>First Year</option>
                             <option value={2}>Second Year</option>
                             <option value={3}>Third Year</option>
+                            <option value={4}>Fourth Year</option>
                         </select>
 
                         <div className="error">

@@ -13,6 +13,7 @@ const intialState = {
     AllCompliants:'',
     AttendanceSave:'',
     updatedContact:'',
+    RegisterToast:'',
     AllCompliantsResolved:'',
     message:""
 }
@@ -97,12 +98,39 @@ export const authSlice = createSlice({
             state.isError = false;
             state.isLoading = true;
             state.isSuccess = false;
+            state.RegisterToast = toast.loading("Registering For Section")
         })
         .addCase(registrationSlice.fulfilled,(state,action)=>{
             state.isError = false
             state.isSuccess = true
             state.isLoading = false
             state.AlreadyRegisterd = action.payload
+            
+            if(action.payload && action.payload?.status === 201){
+                toast.update(state.RegisterToast, {
+                    render: "Registered And Confirmation Mail Generated",
+                    type: toast.TYPE.SUCCESS,
+                    isLoading: false,
+                    autoClose: 3000,
+                });
+            } 
+            else if(action.payload && action.payload?.status === 301){
+                toast.update(state.RegisterToast, {
+                    render: "Registered Error in Mail Generation",
+                    type: toast.TYPE.INFO,
+                    isLoading: false, 
+                    autoClose: 3000,
+                });
+            }
+            else{
+                toast.update(state.RegisterToast, {
+                    render: action.payload?.message,
+                    type: toast.TYPE.ERROR,
+                    isLoading: false, 
+                    autoClose: 3000,
+                });
+            }       
+
         })
         .addCase(registrationSlice.rejected,(state,action)=>{
             state.isError = true

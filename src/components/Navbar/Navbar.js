@@ -98,6 +98,16 @@ function NavBar() {
               </NavLink></li>}
               <li className="nav-item">
             </li>
+            <li>
+              <NavLink
+              >
+                <img
+                  src="https://res.cloudinary.com/ddkdeeue3/image/upload/v1727499284/jm97kywmlw1o3vjbgmux.jpg"
+                  alt="Nav Item"
+                  style={{ width: '50px', height: '50px',borderRadius:"50%" }}
+                />
+              </NavLink>
+            </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
             {click ? (
