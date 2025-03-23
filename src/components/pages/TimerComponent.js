@@ -14,7 +14,7 @@ const MyComponent = () => {
       setTimeLeft(timeLeft);
       timeLeft <= 0 && window.location.reload()
     }, 1000);
-  }, [timeLeft]);
+  }, [timeLeft]); 
 
 
   function calculateTimeLeft(localStorageTime) {
